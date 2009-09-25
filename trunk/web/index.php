@@ -1,3 +1,3 @@
 <?php
-	phpinfo();
+	require(dirname(getcwd()) . "/core/init.php");
 ?>
