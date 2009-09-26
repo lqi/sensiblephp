@@ -19,7 +19,28 @@ class Controller {
 			header("Location: /$controller/$module");
 		else
 			header("Location: /$controller");
-	}	
-
+	}
+	
+	function fetchGet($key) {
+		if (isset($_GET[$key]))
+			return $_GET[$key];
+		return false;
+	}
+	
+	function fetchPost($key) {
+		if (isset($_POST[$key]))
+			return $_POST[$key];
+		return false;
+	}
+	
+	function fetchCookie($key) {
+		if (isset($_COOKIE[$key]))
+			return $_COOKIE[$key];
+		return false;
+	}
+	
+	function setValue($key, $value) {
+		$this->view->setValue($key, $value);
+	}
 }
 ?>
