@@ -1,4 +1,4 @@
-<form action="/Blog/post" method="post">
-	<input name="inputField" />
+<form action="/Blog/post?getFromGET=abc" method="post">
+	<input name="getFromPOST" />
 	<input type="submit" />
 </form>

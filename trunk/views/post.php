@@ -1,3 +1,5 @@
 <?php
-echo $this->getValue("inputValue");
+echo "getFromPOST: " . $this->getValue("getFromPOST") . 
+	"<br />" . 
+	"getFromGET: " . $this->getValue("getFromGET");
 ?>
