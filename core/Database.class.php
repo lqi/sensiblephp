@@ -1,10 +1,10 @@
 <?php
 class Database {
-	private $host;# = (isset($dbConf->host)) ? $dbConf->host : "localhost";
-	private $port;# = (isset($dbConf->port)) ? $dbConf->port : "3306";
-	private $user;# = (isset($dbConf->user)) ? $dbConf->port : null;
-	private $password;# = (isset($dbConf->password)) ? $dbConf->password : null;
-	private $dbname;# = (isset($dbConf->dbname)) ? $dbConf->dbname : null;
+	private $host;
+	private $port;
+	private $user;
+	private $password;
+	private $dbname;
 	public $dbh;
 	
 	function __construct() {

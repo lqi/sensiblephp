@@ -1,5 +1,5 @@
 <?php
-class BlogModel extends Model {
+class Blog {
 	private $id;
 	private $date;
 	private $title;
@@ -13,12 +13,13 @@ class BlogModel extends Model {
 		elseif(is_null($value))
 			$value = 'NULL';
 		else
-			$value = "'$value'";
+			$value = "$value";
 		$this->$key = $value;
 	}
 
 	public function __get($key) {
 		return $this->$key;
 	}
+	
 }
 ?>
