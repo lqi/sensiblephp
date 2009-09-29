@@ -1,7 +1,7 @@
 <?php
 class BlogController extends Controller {
 	function indexAction() {
-		$this->setTemplate("index");
+		$this->setTemplate("blog/index");
 		$blogDb = new BlogDb;
 		$blogArray = $blogDb->getLatestBlogPosts(10);
 		$this->setValue("blogArray", $blogArray);
@@ -9,7 +9,7 @@ class BlogController extends Controller {
 	
 	function blogAction() {
 		$id = $this->fetchGet("id");
-		$this->setTemplate("blog");
+		$this->setTemplate("blog/blog");
 		
 		$blogDb = new BlogDb;
 		$blog = $blogDb->getPostById($id);

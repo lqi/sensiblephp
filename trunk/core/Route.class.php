@@ -9,7 +9,7 @@ class Route {
 		);
 
 		$temp = explode("/", substr($path["path"], 1));
-		$controller = (@$temp[0]) ? $temp[0] : "Blog";
+		$controller = (@$temp[0]) ? $temp[0] : "Homepage";
 		$module = strtolower((@$temp[1]) ? $temp[1] : "index");
 
 		$class = $controller . "Controller";
