@@ -3,7 +3,7 @@
 <ul>
 
 <?php
-foreach($this->getValue("blogArray") as $id=>$blog) {
+foreach($this->getValue("blogArray") as $id => $blog) {
 ?>
 
 <li>
