@@ -86,5 +86,29 @@ class AdminController extends Controller {
 			echo "Delete Blog Comment Error!";
 		}
 	}
+	
+	function dictlistAction() {
+		$dictDb = new DictionaryDb;
+		$dictItems = $dictDb->getAllDictItems();
+		$this->setTemplate("admin/dictlist");
+		$this->setValue("dictArray", $dictItems);
+	}
+	
+	function dictaddAction() {
+		$this->setTemplate("admin/dictform");
+	}
+	
+	function dictinsertAction() {
+		$term = $this->fetchPost("term");
+		$definition = $this->fetchPost("definition");
+		$dictDb = new DictionaryDb;
+		$rs = $dictDb->insertNewDictItem($term, $definition);
+		if($rs) {
+			$this->redirect("Admin", "dictlist");
+		}
+		else {
+			echo "Insert New Dict Error!";
+		}
+	}
 }
 ?>
