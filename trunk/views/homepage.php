@@ -4,7 +4,7 @@
 
 <li><a href="/Blog">Blog</a></li>
 
-<li><a href="/Dict">Dictionary</a></li>
+<li><a href="/Dictionary">Dictionary</a></li>
 
 <li><a href="/Production">Production</a></li>
 
