@@ -1,0 +1,39 @@
+<?php
+require_once 'init.php';
+ 
+class TextFieldTest extends PHPUnit_Framework_TestCase
+{
+	private $textField;
+	
+	protected function setUp() {
+		$this->textField = new TextField;
+	}
+	
+	public function testGetType() {
+		$this->assertEquals("TextField", $this->textField->getFieldType());
+	}
+	
+	public function testGetSafeValue() {
+		$this->textField->setValue("I'll \"walk\" the <b>dog</b> now");
+		$this->assertEquals("I'll &quot;walk&quot; the &lt;b&gt;dog&lt;/b&gt; now",
+			$this->textField->getSafeValue());
+	}
+	
+	public function testGetBreakLineValue() {
+		$this->textField->setValue("foo isn't\n bar");
+		$this->assertEquals("foo isn't<br />\n bar",
+			$this->textField->getBreakLineValue());
+	}
+	
+	public function testGetValue() {
+		$this->textField->setValue("I'll \"walk\" the <b>dog</b>\n now");
+		$this->assertEquals("I'll &quot;walk&quot; the &lt;b&gt;dog&lt;/b&gt;<br />\n now",
+			$this->textField->getValue());
+	}
+	
+	public function testOriginalValue() {
+		$this->textField->setValue("I'll \"walk\" the <b>dog</b>\n now");
+		$this->assertEquals("I'll \"walk\" the <b>dog</b>\n now",
+			$this->textField->getOriginalValue());
+	}
+}
