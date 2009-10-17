@@ -1,38 +1,34 @@
 <?php
-class StringField extends Fields {
+class TextField extends Fields {
 	private $value;
-	private $maxLength;
-	
-	function StringField($length = 255) {
-		$this->maxLength = $length;
-	}
 	
 	function getFieldType() {
-		return "StringField";
+		return "TextField";
 	}
 	
-	function getMaxLength() {
-		return $this->maxLength;
+	function getSafeType() {
+		return htmlentities($this->value);
 	}
 	
 	function setValue($value) {
 		if (strlen($value) == 0)
 			throw new Exception('Exception: Empty value.');
-		if (strlen($value) > $this->maxLength)
-			throw new Exception('Exception: More characters than max length.');
 		$this->value = $value;
 	}
 	
 	function getValue() {
-		return $this->getSafeValue();
+		return $this->breakLineValue($this->safeValue($this->value));
 	}
 	
 	function getSafeValue() {
 		return $this->safeValue($this->value);
 	}
 	
+	function getBreakLineValue() {
+		return $this->breakLineValue($this->value);
+	}
+	
 	function getOriginalValue() {
 		return $this->value;
 	}
 }
-?>
