@@ -110,5 +110,40 @@ class AdminController extends Controller {
 			echo "Insert New Dict Error!";
 		}
 	}
+	
+	function dicteditAction() {
+		$id = $this->fetchGet("id");
+		$this->setTemplate("admin/dicteditform");
+
+		$dictDb = new DictionaryDb;
+		$dict = $dictDb->getDictById($id);
+		$this->setValue("dict", $dict);
+	}
+	
+	function dictupdateAction() {
+		$id = $this->fetchPost("id");
+		$definition = $this->fetchPost("definition");
+		
+		$dictDb = new DictionaryDb;
+		$rs = $dictDb->updateCurrentDictItem($id, $definition);
+		if($rs) {
+			$this->redirect("Admin", "dictlist");
+		}
+		else {
+			echo "Update Dict Error!";
+		}
+	}
+	
+	function dictdeleteAction() {
+		$id = $this->fetchGet("id");
+		$dictDb = new DictionaryDb;
+		$rs = $dictDb->deleteDictionaryById($id);
+		if($rs) {
+			$this->redirect("Admin", "dictlist");
+		}
+		else {
+			echo "Delete Dictionary Error!";
+		}
+	}
 }
 ?>
