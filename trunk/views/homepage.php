@@ -11,3 +11,5 @@
 <li><a href="/Coupon">Coupon</a></li>
 
 </ul>
+
+<h3><a href="/Admin">Private Admin</a></h3>
