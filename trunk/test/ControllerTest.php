@@ -1,5 +1,5 @@
 <?php
-require_once '../init.php';
+require_once 'init.php';
  
 class ControllerTest extends PHPUnit_Framework_TestCase
 {
