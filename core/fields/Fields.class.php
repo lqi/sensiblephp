@@ -1,5 +1,7 @@
 <?php
-class Fields {
+abstract class Fields {
+	abstract function getFieldType();
+	
 	function safeValue($value) {
 		return htmlentities($value);
 	}
