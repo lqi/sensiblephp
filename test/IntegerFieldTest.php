@@ -38,3 +38,4 @@ class IntegerFieldTest extends PHPUnit_Framework_TestCase
 		$this->fail("Exception expected: Set Float to Integer Field.");
 	}
 }
+?>

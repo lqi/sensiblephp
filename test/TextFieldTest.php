@@ -37,3 +37,4 @@ class TextFieldTest extends PHPUnit_Framework_TestCase
 			$this->textField->getOriginalValue());
 	}
 }
+?>
