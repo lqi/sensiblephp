@@ -38,7 +38,7 @@ class DateFieldTest extends PHPUnit_Framework_TestCase
 	
 	public function testErrorDateInput() {
 		try {
-			$this->dateField = new DateField(2009, 13, 32);
+			$this->dateField = new DateField(2009, -1, 32);
 		}
 		catch (Exception $ex) {
 			return;
