@@ -9,6 +9,10 @@ class TimeField extends Fields {
 	}
 	
 	function TimeField($hour = 0, $minute = 0, $second = 0) {
+		$this->setValue($hour, $minute, $second);
+	}
+	
+	function setValue($hour, $minute, $second) {
 		if (!mktime($hour, $minute, $second, 1, 1, 1970))
 			throw new Exception("Exception: Illigal input!");
 		if ($hour < 0 || $hour > 23 || $minute < 0 || $minute > 59 || $second < 0 || $second > 59)
