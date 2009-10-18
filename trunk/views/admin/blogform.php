@@ -1,5 +1,5 @@
 <?php
-$editFlag = ($this->getValue("blog"))?true:false;
+$editFlag = ($this->getValue("blog")) ? true : false;
 if ($editFlag) {
 ?>
 	<h1>Admin - Edit Blog</h1>
@@ -21,8 +21,8 @@ else {
 if($editFlag) {
 ?>
 
-<p>Id: <?php echo $this->getValue("blog")->id; ?></p>
-<input type="hidden" name="blogId" value="<?php echo $this->getValue("blog")->id; ?>" />
+<p>Id: <?php echo $this->getValue("blog")->id->getValue(); ?></p>
+<input type="hidden" name="blogId" value="<?php echo $this->getValue("blog")->id->getValue(); ?>" />
 <?php
 }
 
@@ -31,7 +31,7 @@ if($editFlag) {
 <p>Title: </p>
 <p><input name="title" value="<?php
 if($editFlag) {
- echo $this->getValue("blog")->title;
+ echo $this->getValue("blog")->title->getValue();
 }
 
 ?>" /></p>
@@ -39,7 +39,7 @@ if($editFlag) {
 <p>Body: </p>
 <p><textarea name="body" rows="20" cols="90"><?php
 if($editFlag) {
- echo $this->getValue("blog")->body;
+ echo $this->getValue("blog")->body->getValue();
 }
 
 ?></textarea></p>
