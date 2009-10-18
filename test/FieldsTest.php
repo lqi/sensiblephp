@@ -1,12 +1,17 @@
 <?php
 require_once 'init.php';
- 
+
+class FieldsMock extends Fields {
+	function getFieldType() {}
+	function getValue() {}
+}
+
 class FieldsTest extends PHPUnit_Framework_TestCase
 {
 	private $fields;
 	
 	protected function setUp() {
-		$this->fields = new Fields;
+		$this->fields = new FieldsMock;
 	}
 	
 	public function testGetSafeValue() {
