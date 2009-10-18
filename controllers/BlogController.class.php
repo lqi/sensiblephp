@@ -15,7 +15,8 @@ class BlogController extends Controller {
 		$blog = $blogDb->getPostById($id);
 		$this->setValue("blog", $blog);
 		
-		$commentArray = $blogDb->getCommentsForBlogPost($id);
+		$blogCommentDb = new BlogCommentDb;
+		$commentArray = $blogCommentDb->getCommentsForBlogPost($id);
 		$this->setValue("commentArray", $commentArray);
 	}
 	
@@ -25,8 +26,8 @@ class BlogController extends Controller {
 		$comment = $this->fetchPost("comment");
 		$date = date("Y-m-d H:i:s");
 		
-		$blogDb = new BlogDb;
-		$rs = $blogDb->insertNewComment($blogId, $date, $username, $comment);
+		$blogCommentDb = new BlogCommentDb;
+		$rs = $blogCommentDb->insertNewComment($blogId, $date, $username, $comment);
 		if($rs) {
 			$this->redirect("Blog", "blog?id=" . $blogId);
 		}

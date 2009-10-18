@@ -31,4 +31,6 @@ class TextField extends Fields {
 	function getOriginalValue() {
 		return $this->value;
 	}
+	
+//getAbbrValue() for String and Text
 }

@@ -8,9 +8,9 @@ foreach($this->getValue("dictArray") as $num => $dict) {
 
 <li>
 
-<h2><?php echo $dict->term; ?></h2>
+<h2><?php echo $dict->term->getValue(); ?></h2>
 
-<h3><?php echo $dict->definition; ?></h3>
+<h3><?php echo $dict->definition->getValue(); ?></h3>
 
 </li>
 

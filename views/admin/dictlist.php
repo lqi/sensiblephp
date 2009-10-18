@@ -10,11 +10,11 @@ foreach($this->getValue("dictArray") as $id => $dict) {
 
 <li>
 | 
-<?php echo $dict->id; ?> | 
-<?php echo $dict->term; ?> | 
-<?php echo $dict->definition; ?> | 
-<a href="/Admin/dictedit?id=<?php echo $dict->id; ?>">Edit</a> | 
-<a href="/Admin/dictdelete?id=<?php echo $dict->id; ?>">Delete</a> |
+<?php echo $dict->id->getValue(); ?> | 
+<?php echo $dict->term->getValue(); ?> | 
+<?php echo $dict->definition->getValue(); ?> | 
+<a href="/Admin/dictedit?id=<?php echo $dict->id->getValue(); ?>">Edit</a> | 
+<a href="/Admin/dictdelete?id=<?php echo $dict->id->getValue(); ?>">Delete</a> |
 
 </li>
 

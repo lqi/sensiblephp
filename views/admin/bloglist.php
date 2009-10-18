@@ -10,11 +10,11 @@ foreach($this->getValue("blogArray") as $id => $blog) {
 
 <li>
 | 
-<?php echo $blog->id; ?> | 
-<?php echo $blog->date; ?> | 
-<?php echo $blog->title; ?> | 
-<a href="/Admin/blogedit?id=<?php echo $blog->id; ?>">Edit</a> | 
-<a href="/Admin/blogdelete?id=<?php echo $blog->id; ?>">Delete</a> |
+<?php echo $blog->id->getValue(); ?> | 
+<?php echo $blog->date->getValue(); ?> | 
+<?php echo $blog->title->getValue(); ?> | 
+<a href="/Admin/blogedit?id=<?php echo $blog->id->getValue(); ?>">Edit</a> | 
+<a href="/Admin/blogdelete?id=<?php echo $blog->id->getValue(); ?>">Delete</a> |
 
 </li>
 

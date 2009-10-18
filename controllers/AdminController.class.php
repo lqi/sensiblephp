@@ -58,9 +58,10 @@ class AdminController extends Controller {
 		$id = $this->fetchGet("id");
 		
 		$blogDb = new BlogDb;
+		$blogCommentDb = new BlogCommentDb;
 		$rs = $blogDb->deleteBlogPost($id);
 		if($rs) {
-			$blogDb->deleteBlogCommentByBlogId($id);
+			$blogCommentDb->deleteBlogCommentByBlogId($id);
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
@@ -70,15 +71,15 @@ class AdminController extends Controller {
 	
 	function blogcommentlistAction() {
 		$this->setTemplate("admin/blogcommentlist");
-		$blogDb = new BlogDb;
-		$commentArray = $blogDb->getAllBlogComments();
+		$blogCommentDb = new BlogCommentDb;
+		$commentArray = $blogCommentDb->getAllBlogComments();
 		$this->setValue("commentArray", $commentArray);
 	}
 	
 	function blogcommentdeleteAction() {
 		$id = $this->fetchGet("commentId");
-		$blogDb = new BlogDb;
-		$rs = $blogDb->deleteBlogCommentByCommentId($id);
+		$blogCommentDb = new BlogCommentDb;
+		$rs = $blogCommentDb->deleteBlogCommentByCommentId($id);
 		if($rs) {
 			$this->redirect("Admin", "blogcommentlist");
 		}
