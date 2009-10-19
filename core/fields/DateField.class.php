@@ -28,9 +28,9 @@ class DateField extends Fields {
 				throw new Exception("Exception: Illigal input!");
 			if (!checkdate($month, $day, $year))
 				throw new Exception("Exception: Illigal Date!");
-			$this->year = $year;
-			$this->month = $month;
-			$this->day = $day;
+			$this->year = (int) $year;
+			$this->month = (int) $month;
+			$this->day = (int) $day;
 		}
 	}
 	

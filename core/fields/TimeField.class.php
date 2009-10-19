@@ -17,9 +17,9 @@ class TimeField extends Fields {
 			throw new Exception("Exception: Illigal input!");
 		if ($hour < 0 || $hour > 23 || $minute < 0 || $minute > 59 || $second < 0 || $second > 59)
 			throw new Exception("Exception: Illigal time!");
-		$this->hour = $hour;
-		$this->minute = $minute;
-		$this->second = $second;
+		$this->hour = (int) $hour;
+		$this->minute = (int) $minute;
+		$this->second = (int) $second;
 	}
 	
 	function getHour_G() {
