@@ -28,21 +28,15 @@ class Controller {
 	}
 	
 	function fetchGet($key) {
-		if (isset($_GET[$key]))
-			return $_GET[$key];
-		return false;
+		return $this->fetchValueFromArray($_GET, $key);
 	}
 	
 	function fetchPost($key) {
-		if (isset($_POST[$key]))
-			return $_POST[$key];
-		return false;
+		return $this->fetchValueFromArray($_POST, $key);
 	}
 	
 	function fetchCookie($key) {
-		if (isset($_COOKIE[$key]))
-			return $_COOKIE[$key];
-		return false;
+		return $this->fetchValueFromArray($_COOKIE, $key);
 	}
 	
 	function setValue($key, $value) {
