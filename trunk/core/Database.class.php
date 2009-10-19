@@ -30,14 +30,14 @@ class Database {
 		return $this->dbh;
 	}
 	
-	function valueObject($row) {
-		return $this->getValueObjectFromPDOResultRowArray($row);
+	function valueObject($array) {
+		return $this->getValueObjectFromPDOResultRowArray($array);
 	}
 	
-	private function getValueObjectFromPDOResultRowArray($row) {
+	private function getValueObjectFromPDOResultRowArray($array) {
 		$model = substr(get_class($this), 0, -2);
 		$valueObject = new $model;
-		foreach($row as $key=>$value) {
+		foreach($array as $key=>$value) {
 			if (is_int($key))
 				continue;
 			if ($valueObject->$key->getFieldType() == "IntegerField") {
@@ -48,6 +48,20 @@ class Database {
 				$valueObject->$key->getFieldType() == "TextField") {
 					$valueObject->$key->setValue($value);
 					continue;
+			}
+			if ($valueObject->$key->getFieldType() == "DateField") {
+				$year = substr($value, 0, 4);
+				$month = substr($value, 5, 2);
+				$day = substr($value, 8, 2);
+				$valueObject->$key->setValue($year, $month, $day);
+				continue;
+			}
+			if ($valueObject->$key->getFieldType() == "TimeField") {
+				$hour = substr($value, 0, 2);
+				$minute = substr($value, 3, 2);
+				$second = substr($value, 6, 2);
+				$valueObject->$key->setValue($hour, $minute, $second);
+				continue;
 			}
 			if ($valueObject->$key->getFieldType() == "DatetimeField") {
 				$year = substr($value, 0, 4);
@@ -61,6 +75,10 @@ class Database {
 			}
 		}
 		return $valueObject;
+	}
+	
+	function getTableName() {
+		return strtolower(substr(get_class($this), 0, -2));
 	}
 }
 ?>

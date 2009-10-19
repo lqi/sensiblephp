@@ -13,6 +13,10 @@ class IntegerField extends Fields {
 	}
 	
 	function getValue() {
+		return $this->getOriginalValue();
+	}
+	
+	function getOriginalValue() {
 		return $this->value;
 	}
 }

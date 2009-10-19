@@ -27,4 +27,7 @@ class DatetimeFieldTest extends PHPUnit_Framework_TestCase
 		}
 		$this->fail("Exception exptected: Inpur error!");
 	}
+	
+	// TODO: A lot of format of datetime
+	// get year, month, ... , second individually
 }
