@@ -14,6 +14,10 @@ class Database {
 		$this->user = ($dbConf->user != null) ? $dbConf->user : null;
 		$this->password = ($dbConf->password != null) ? $dbConf->password : null;
 		$this->dbname = ($dbConf->dbname != null) ? $dbConf->dbname : null;
+		$this->connection();
+	}
+	
+	function connection() {
 		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;	
 		try {
 			$this->dbh = new PDO($conn, $this->user, $this->password);
