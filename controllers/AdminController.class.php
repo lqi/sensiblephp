@@ -7,8 +7,7 @@ class AdminController extends Controller {
 	function bloglistAction() {
 		$this->setTemplate("admin/bloglist");
 		$blogDb = new BlogDb;
-		$blogArray = $blogDb->getAllBlogPosts();
-		$this->setValue("blogArray", $blogArray);
+		$this->setValue("blogArray", $blogDb->getAllBlogPosts());
 	}
 	
 	function blogaddAction() {
@@ -21,12 +20,11 @@ class AdminController extends Controller {
 		$date = date("Y-m-d H:i:s");
 		
 		$blogDb = new BlogDb;
-		$rs = $blogDb->insertNewBlogPost($date, $title, $body);
-		if($rs) {
+		if($blogDb->insertNewBlogPost($date, $title, $body)) {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
-			echo "New Blog Post Error!";
+			throw new Exception("New Blog Post Error!");
 		}
 	}
 	
@@ -35,8 +33,7 @@ class AdminController extends Controller {
 		$this->setTemplate("admin/blogform");
 		
 		$blogDb = new BlogDb;
-		$blog = $blogDb->getPostById($id);
-		$this->setValue("blog", $blog);
+		$this->setValue("blog", $blogDb->getPostById($id));
 	}
 	
 	function blogupdateAction() {
@@ -45,12 +42,11 @@ class AdminController extends Controller {
 		$body = $this->fetchPost("body");
 		
 		$blogDb = new BlogDb;
-		$rs = $blogDb->updateBlogPost($id, $title, $body);
-		if($rs) {
+		if($blogDb->updateBlogPost($id, $title, $body)) {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
-			echo "Update Blog Post Error!";
+			throw new Exception("Update Blog Post Error!");
 		}
 	}
 	
@@ -59,40 +55,36 @@ class AdminController extends Controller {
 		
 		$blogDb = new BlogDb;
 		$blogCommentDb = new BlogCommentDb;
-		$rs = $blogDb->deleteBlogPost($id);
-		if($rs) {
+		if($blogDb->deleteBlogPost($id)) {
 			$blogCommentDb->deleteBlogCommentByBlogId($id);
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
-			echo "Delete Blog Post Error!";
+			throw new Exception("Delete Blog Post Error!");
 		}
 	}
 	
 	function blogcommentlistAction() {
 		$this->setTemplate("admin/blogcommentlist");
 		$blogCommentDb = new BlogCommentDb;
-		$commentArray = $blogCommentDb->getAllBlogComments();
-		$this->setValue("commentArray", $commentArray);
+		$this->setValue("commentArray", $blogCommentDb->getAllBlogComments());
 	}
 	
 	function blogcommentdeleteAction() {
 		$id = $this->fetchGet("commentId");
 		$blogCommentDb = new BlogCommentDb;
-		$rs = $blogCommentDb->deleteBlogCommentByCommentId($id);
-		if($rs) {
+		if($blogCommentDb->deleteBlogCommentByCommentId($id)) {
 			$this->redirect("Admin", "blogcommentlist");
 		}
 		else {
-			echo "Delete Blog Comment Error!";
+			throw new Exception("Delete Blog Comment Error!");
 		}
 	}
 	
 	function dictlistAction() {
 		$dictDb = new DictionaryDb;
-		$dictItems = $dictDb->getAllDictItems();
 		$this->setTemplate("admin/dictlist");
-		$this->setValue("dictArray", $dictItems);
+		$this->setValue("dictArray", $dictDb->getAllDictItems());
 	}
 	
 	function dictaddAction() {
@@ -103,12 +95,11 @@ class AdminController extends Controller {
 		$term = $this->fetchPost("term");
 		$definition = $this->fetchPost("definition");
 		$dictDb = new DictionaryDb;
-		$rs = $dictDb->insertNewDictItem($term, $definition);
-		if($rs) {
+		if($dictDb->insertNewDictItem($term, $definition)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
-			echo "Insert New Dict Error!";
+			throw new Exception("Insert New Dict Error!");
 		}
 	}
 	
@@ -117,8 +108,7 @@ class AdminController extends Controller {
 		$this->setTemplate("admin/dicteditform");
 
 		$dictDb = new DictionaryDb;
-		$dict = $dictDb->getDictById($id);
-		$this->setValue("dict", $dict);
+		$this->setValue("dict", $dictDb->getDictById($id));
 	}
 	
 	function dictupdateAction() {
@@ -126,24 +116,22 @@ class AdminController extends Controller {
 		$definition = $this->fetchPost("definition");
 		
 		$dictDb = new DictionaryDb;
-		$rs = $dictDb->updateCurrentDictItem($id, $definition);
-		if($rs) {
+		if($dictDb->updateCurrentDictItem($id, $definition)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
-			echo "Update Dict Error!";
+			throw new Exception("Update Dict Error!");
 		}
 	}
 	
 	function dictdeleteAction() {
 		$id = $this->fetchGet("id");
 		$dictDb = new DictionaryDb;
-		$rs = $dictDb->deleteDictionaryById($id);
-		if($rs) {
+		if($dictDb->deleteDictionaryById($id)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
-			echo "Delete Dictionary Error!";
+			throw new Exception("Delete Dictionary Error!");
 		}
 	}
 }

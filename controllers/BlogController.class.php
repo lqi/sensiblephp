@@ -3,8 +3,7 @@ class BlogController extends Controller {
 	function indexAction() {
 		$this->setTemplate("blog/index");
 		$blogDb = new BlogDb;
-		$blogArray = $blogDb->getLatestBlogPosts(10);
-		$this->setValue("blogArray", $blogArray);
+		$this->setValue("blogArray", $blogDb->getLatestBlogPosts(10));
 	}
 	
 	function blogAction() {
@@ -12,12 +11,10 @@ class BlogController extends Controller {
 		$this->setTemplate("blog/blog");
 		
 		$blogDb = new BlogDb;
-		$blog = $blogDb->getPostById($id);
-		$this->setValue("blog", $blog);
+		$this->setValue("blog", $blogDb->getPostById($id));
 		
 		$blogCommentDb = new BlogCommentDb;
-		$commentArray = $blogCommentDb->getCommentsForBlogPost($id);
-		$this->setValue("commentArray", $commentArray);
+		$this->setValue("commentArray", $blogCommentDb->getCommentsForBlogPost($id));
 	}
 	
 	function newcommentAction() {
@@ -27,12 +24,11 @@ class BlogController extends Controller {
 		$date = date("Y-m-d H:i:s");
 		
 		$blogCommentDb = new BlogCommentDb;
-		$rs = $blogCommentDb->insertNewComment($blogId, $date, $username, $comment);
-		if($rs) {
+		if($blogCommentDb->insertNewComment($blogId, $date, $username, $comment)) {
 			$this->redirect("Blog", "blog?id=" . $blogId);
 		}
 		else {
-			echo "Comment Post Error!";
+			throw new Exception("Comment Post Error!");
 		}
 	}
 
