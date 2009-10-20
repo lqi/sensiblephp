@@ -154,18 +154,65 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($array, $this->mockDb->filter(2));
 	}
 	
-	// TODO!!!
-	// function testFilterByErrorParameter() {
-	// 	try {
-	// 		$this->mockDb->filter("s", 1);
-	// 	}
-	// 	catch(Exception $ex) {
-	// 		// :)
-	// 	}
-	// 	$this->fail("Exception expected: Error filter input!");
-	// }
+	function testFilterByErrorParameter() {
+		try {
+			$this->mockDb->filter("s", 1);
+		}
+		catch(Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: Error filter input!");
+	}
 	
 	function testRemove() {
 		$this->assertEquals(0, $this->mockDb->rm(99));
 	} // Only negative test case at the moment, need more
+	
+	function testCreate() {
+		$this->assertEquals("SUCCESS", $this->mockDb->create("CREATE"));
+	}
+	
+	function testCreateWithoutConfirmMessage() {
+		try {
+			$this->mockDb->create();
+		}
+		catch (Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: without confirm message.");
+	}
+	
+	function testCreateWithIlligalConfirmMessage() {
+		try {
+			$this->mockDb->create("somethingElse");
+		}
+		catch (Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: with illigal confirm message");
+	}
+	
+	function testDrop() {
+		$this->assertEquals("SUCCESS", $this->mockDb->drop("DROP"));
+	}
+	
+	function testDropWithoutConfirmMessage() {
+		try {
+			$this->mockDb->drop();
+		}
+		catch (Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: without confirm message.");
+	}
+	
+	function testDropWithIlligalConfirmMessage() {
+		try {
+			$this->mockDb->drop("somethingElse");
+		}
+		catch (Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: with illigal confirm message");
+	}
 }
