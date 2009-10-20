@@ -20,7 +20,7 @@ class Database {
 	function connection() {
 		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;	
 		try {
-			$this->dbh = new PDO($conn, $this->user, $this->password);
+			$this->setDbConnection(new PDO($conn, $this->user, $this->password));
 		} catch (Exception $ex) {
 			echo $ex->getMessage();
 		}
@@ -28,6 +28,10 @@ class Database {
 	
 	function db() {
 		return $this->dbh;
+	}
+	
+	function setDbConnection($dbh) {
+		$this->dbh = $dbh;
 	}
 	
 	function valueObject($array) {
@@ -77,8 +81,77 @@ class Database {
 		return $valueObject;
 	}
 	
+	function query($statement) {
+		return $this->db()->query($statement);
+	}
+	
+	function execute($statement) {
+		return $this->db()->exec($statement);
+	}
+	
 	function getTableName() {
 		return strtolower(substr(get_class($this), 0, -2));
+	}
+	
+	function getPKName() {
+		$sql = "DESCRIBE `" . $this->getTableName() . "`";
+		$rs = $this->query($sql)->fetchAll();
+		foreach($rs as $row) {
+			if($row["Key"] == "PRI") {
+				return $row["Field"];
+			}
+		}
+		throw Exception ("Exception: No Primary Key found!");
+	}
+	
+	function all() {
+		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` DESC";
+		$array = array();
+		foreach($this->query($sql) as $row) {
+			$array[] = $this->valueObject($row);
+		}
+		return $array;
+	}
+	
+	function get($pk) {
+		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` = " . $pk;
+		foreach($this->query($sql) as $row) {
+			$array = $this->valueObject($row);
+		}
+		return $array;
+	}
+	
+	function filter($left = -1, $right = -1) { // Thinking about how to rename these two
+		if ($left <= -1 && $right <= -1)
+			return $this->all();
+		elseif ($left > -1 && $right <= -1) {
+			if (!is_int($left))
+				throw new Exception("Exception: Filter length must be an integer!");
+			$start = 0;
+			$length = $left;
+		}
+		elseif ($left > -1 && $right > -1) {
+			if (!(is_int($left)&&is_int($right)))
+				throw new Exception("Exception: Filter start point and length must be integer!");
+			$start = $left;
+			$length = $right;
+		}
+		else {
+			throw new Exception("Exception: Unhandled exception!");
+			// TODO!!!
+		}
+		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length;
+		$array = array();
+		foreach($this->query($sql) as $row) {
+			$array[] = $this->valueObject($row);
+		}
+		return $array;
+	}
+	
+	function rm($pk) {
+		$sql = "DELETE FROM `" . $this->getTableName() . "` WHERE `" . $this->getPKName() . "`=" . $pk;
+		$rs = $this->execute($sql);
+		return $rs;
 	}
 }
 ?>

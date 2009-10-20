@@ -1,6 +1,24 @@
 <?php
 require_once 'init.php';
 
+/*
+CREATE TABLE `mock` (
+ `integer` int(11) NOT NULL AUTO_INCREMENT,
+ `date` date NOT NULL,
+ `time` time NOT NULL,
+ `datetime` datetime NOT NULL,
+ `string` varchar(30) NOT NULL,
+ `text` text NOT NULL,
+ PRIMARY KEY (`integer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
+VALUES (NULL, '2008-8-8', '8:8:8', '2008-8-8 8:8:8', 'First', 'This is the first item.');
+
+INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
+VALUES (NULL, '2009-9-9', '9:9:9', '2009-9-9 9:9:9', 'Second', 'This is the second item.')
+*/
+
 class Mock {
 	private $integer;
 	private $date;
@@ -31,26 +49,28 @@ class Mock {
 
 class MockDb extends Database {
 	function connection() {
-		// As a mock object, do not need to connect to the remote server,
-		// so here, overwrite the parent methods.
-	}
-	
+		$conn = "mysql:host=localhost;dbname=cents";	
+		try {
+			$this->setDbConnection(new PDO($conn, "root", "root"));
+		} catch (Exception $ex) {
+			echo $ex->getMessage();
+		}
+	}	
 }
  
-class DatabaseTest extends PHPUnit_Framework_TestCase
-{
+class DatabaseTest extends PHPUnit_Framework_TestCase {
 	private $mockDb;
 	
 	protected function setUp() {
 		$this->mockDb = new MockDb;
 	}
 	
-	function testGetMockDb() {
-		$this->assertEquals(null, $this->mockDb->db());
-	}
-	
 	function testGetTableName() {
 		$this->assertEquals("mock", $this->mockDb->getTableName());
+	}
+	
+	function testGetPrimaryKeyName() {
+		$this->assertEquals("integer", $this->mockDb->getPKName());
 	}
 	
 	function testGetValueObjectForIntegerField() {
@@ -99,4 +119,53 @@ class DatabaseTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(2, $valueObject->date->getMonth_n());
 		$this->assertEquals(29, $valueObject->date->getDay_j());
 	}
+	
+	function testAll() {
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "` ORDER BY `" . $this->mockDb->getPKName() . "` DESC";
+		$array = array();
+		foreach($this->mockDb->query($sql) as $row) {
+			$array[] = $this->mockDb->valueObject($row);
+		}
+		$this->assertEquals($array, $this->mockDb->all());
+	}
+	
+	function testGet() {
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "` WHERE `" . $this->mockDb->getPKName() . "` = 1";
+		$this->assertEquals(1, $this->mockDb->get(1)->integer->getValue());
+	}
+	
+	function testFilterByTwoParameters() {
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "` ORDER BY `" . 
+			$this->mockDb->getPKName() . "` DESC LIMIT 1, 1";
+		$array = array();
+		foreach($this->mockDb->query($sql) as $row) {
+			$array[] = $this->mockDb->valueObject($row);
+		}
+		$this->assertEquals($array, $this->mockDb->filter(1, 1));
+	}
+	
+	function testFilterByOneParameter() {
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "` ORDER BY `" . 
+			$this->mockDb->getPKName() . "` DESC LIMIT 0, 2";
+		$array = array();
+		foreach($this->mockDb->query($sql) as $row) {
+			$array[] = $this->mockDb->valueObject($row);
+		}
+		$this->assertEquals($array, $this->mockDb->filter(2));
+	}
+	
+	// TODO!!!
+	// function testFilterByErrorParameter() {
+	// 	try {
+	// 		$this->mockDb->filter("s", 1);
+	// 	}
+	// 	catch(Exception $ex) {
+	// 		// :)
+	// 	}
+	// 	$this->fail("Exception expected: Error filter input!");
+	// }
+	
+	function testRemove() {
+		$this->assertEquals(0, $this->mockDb->rm(99));
+	} // Only negative test case at the moment, need more
 }
