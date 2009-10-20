@@ -153,5 +153,29 @@ class Database {
 		$rs = $this->execute($sql);
 		return $rs;
 	}
+	
+	function create($confirmMessage = null) {
+		if ($confirmMessage == null) {
+			throw new Exception("Exception: `CREATE TABLE` confirm Message needed!");
+		}
+		if ($confirmMessage == "CREATE") {
+			return "SUCCESS";
+		}
+		throw new Exception("Exception: Illigal `CREATE TABLE` confirm message!");
+	}
+	
+	function drop($confirmMessage = null) {
+		if ($confirmMessage == null) {
+			throw new Exception("Exception: `DROP TABLE` confirm Message needed!");
+		}
+		if ($confirmMessage == "DROP") {
+			return "SUCCESS";
+		}
+		throw new Exception("Exception: Illigal `DROP TABLE` confirm message!");
+	}
+	
+	function save() {
+		//
+	}
 }
 ?>
