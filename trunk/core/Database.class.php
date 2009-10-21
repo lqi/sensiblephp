@@ -121,16 +121,16 @@ class Database {
 		return $array;
 	}
 	
-	function filter($left = -1, $right = -1) { // Thinking about how to rename these two
-		if ($left <= -1 && $right <= -1)
+	function filter($left = null, $right = null) { // Thinking about how to rename these two
+		if ($left == null && $right == null)
 			return $this->all();
-		elseif ($left > -1 && $right <= -1) {
+		elseif ($left != null && $right == null) {
 			if (!is_int($left))
 				throw new Exception("Exception: Filter length must be an integer!");
 			$start = 0;
 			$length = $left;
 		}
-		elseif ($left > -1 && $right > -1) {
+		elseif ($left != null && $right != null) {
 			if (!(is_int($left)&&is_int($right)))
 				throw new Exception("Exception: Filter start point and length must be integer!");
 			$start = $left;
@@ -138,7 +138,6 @@ class Database {
 		}
 		else {
 			throw new Exception("Exception: Unhandled exception!");
-			// TODO!!!
 		}
 		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length;
 		$array = array();
