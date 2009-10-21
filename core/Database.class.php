@@ -174,8 +174,37 @@ class Database {
 		throw new Exception("Exception: Illigal `DROP TABLE` confirm message!");
 	}
 	
-	function save() {
-		//
+	function save($model) {
+		if ($model->pk->getValue() == null) { // insert new item
+			$keyString = "";
+			$valueString = "";
+			foreach($model->getVarsWithoutPK() as $attribute) {
+				$keyString = $keyString . "`" . $attribute . "`, ";
+				$valueString = $valueString . "'" . $model->$attribute->getValue() . "', ";
+			}
+			$keyString = substr($keyString, 0, -2);
+			$valueString = substr($valueString, 0, -2);
+			$sql = "INSERT INTO `" . $model->getTableName() . "` (" . $keyString . ") " .
+				   "VALUES (" . $valueString . ")";
+			$rs = $this->execute($sql);
+			if ($rs) {
+				return true;
+			}
+		}
+		else { // update current item
+			$setString = "";
+			foreach($model->getVarsWithoutPK() as $attribute) {
+				$setString = $setString . "`" . $attribute . "` = '" . $model->$attribute->getValue() . "', ";
+			}
+			$setString = substr($setString, 0, -2);
+			$sql = "UPDATE `" . $model->getTableName() . "` SET " . $setString . 
+					" WHERE `" . $model->getPKField() . "`=" . $model->pk->getValue();
+			$rs = $this->execute($sql);
+			if ($rs) {
+				return true;
+			}
+		}
+		throw new Exception("Exception: Error in saving item.");
 	}
 }
 ?>

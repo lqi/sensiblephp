@@ -1,26 +1,16 @@
 <?php
-class Blog {
-	private $id;
-	private $date;
-	private $title;
-	private $body;
+class Blog extends Model {
+	protected $id;
+	protected $date;
+	protected $title;
+	protected $body;
 	
 	public function __construct() {
 		$this->id = new IntegerField;
 		$this->date = new DatetimeField;
 		$this->title = new StringField;
 		$this->body = new TextField;
+		$this->setPKField("id");
 	}
-	
-	public function __set($key, $value) {
-		if(is_resource($key))
-			throw new Exception('Exception: Attribute Not Found.');
-		$key = $value;
-	}
-
-	public function __get($key) {
-		return $this->$key;
-	}
-	
 }
 ?>

@@ -42,7 +42,8 @@ class AdminController extends Controller {
 		$body = $this->fetchPost("body");
 		
 		$blogDb = new BlogDb;
-		if($blogDb->updateBlogPost($id, $title, $body)) {
+		$date = $blogDb->getPostById($id)->date->getValue();
+		if($blogDb->updateBlogPost($id, $date, $title, $body)) {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
