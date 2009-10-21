@@ -31,7 +31,7 @@ if($editFlag) {
 <p>Title: </p>
 <p><input name="title" value="<?php
 if($editFlag) {
- echo $this->getValue("blog")->title->getValue();
+ echo $this->getValue("blog")->title->getOriginalValue();
 }
 
 ?>" /></p>
@@ -39,7 +39,7 @@ if($editFlag) {
 <p>Body: </p>
 <p><textarea name="body" rows="20" cols="90"><?php
 if($editFlag) {
- echo $this->getValue("blog")->body->getValue();
+ echo $this->getValue("blog")->body->getOriginalValue();
 }
 
 ?></textarea></p>

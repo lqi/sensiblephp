@@ -1,10 +1,10 @@
 <?php
-class BlogComment {
-	private $id;
-	private $blog_id;
-	private $date;
-	private $username;
-	private $comment;
+class BlogComment extends Model {
+	protected $id;
+	protected $blog_id;
+	protected $date;
+	protected $username;
+	protected $comment;
 	
 	public function __construct() {
 		$this->id = new IntegerField;
@@ -12,16 +12,7 @@ class BlogComment {
 		$this->date = new DatetimeField;
 		$this->username = new StringField;
 		$this->comment = new TextField;
-	}
-	
-	public function __set($key, $value) {
-		if(is_resource($key))
-			throw new Exception('Exception: Attribute Not Found.');
-		$this->$key = $value;
-	}
-
-	public function __get($key) {
-		return $this->$key;
+		$this->setPKField("id");
 	}
 }
 ?>
