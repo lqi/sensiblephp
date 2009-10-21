@@ -4,7 +4,15 @@ class View {
 	private $vars = array();
 	
 	function setTemplate($template) {
-		$this->template = $template;
+		if(file_exists(VIEWS_DIR . $template . ".php")) {
+			$this->template = $template;
+			return;
+		}
+		throw new Exception("Exception: set no exist template file.");
+	}
+	
+	function getTemplateName() {
+		return $this->template;
 	}
 	
 	function render() {
@@ -20,7 +28,7 @@ class View {
 	function getValue($key) {
 		if (isset($this->vars[$key]))
 			return $this->vars[$key];
-		return false;
+		throw new Exception("Exception: fail in getting value from current key word.");
 	}
 }
 ?>
