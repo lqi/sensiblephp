@@ -7,7 +7,7 @@ class AdminController extends Controller {
 	function bloglistAction() {
 		$this->setTemplate("admin/bloglist");
 		$blogDb = new BlogDb;
-		$this->setValue("blogArray", $blogDb->getAllBlogPosts());
+		$this->setValue("blogArray", $blogDb->all());
 	}
 	
 	function blogaddAction() {
@@ -17,10 +17,21 @@ class AdminController extends Controller {
 	function bloginsertAction() {
 		$title = $this->fetchPost("title");
 		$body = $this->fetchPost("body");
-		$date = date("Y-m-d H:i:s");
+		//the following will be refactored
+		$year = date("Y");
+		$month = date("m");
+		$day = date("d");
+		$hour = date("H");
+		$minute = date("i");
+		$second = date("s");
+		// the above will be refactored
+		$blog = new Blog;
+		$blog->date->setValue($year, $month, $day, $hour, $minute, $second);
+		$blog->title->setValue($title);
+		$blog->body->setValue($body);
 		
 		$blogDb = new BlogDb;
-		if($blogDb->insertNewBlogPost($date, $title, $body)) {
+		if($blogDb->save($blog)) {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
@@ -33,7 +44,7 @@ class AdminController extends Controller {
 		$this->setTemplate("admin/blogform");
 		
 		$blogDb = new BlogDb;
-		$this->setValue("blog", $blogDb->getPostById($id));
+		$this->setValue("blog", $blogDb->get($id));
 	}
 	
 	function blogupdateAction() {
@@ -42,8 +53,23 @@ class AdminController extends Controller {
 		$body = $this->fetchPost("body");
 		
 		$blogDb = new BlogDb;
-		$date = $blogDb->getPostById($id)->date->getValue();
-		if($blogDb->updateBlogPost($id, $date, $title, $body)) {
+		$date = $blogDb->get($id)->date->getValue();
+		
+		$blog = new Blog;
+		//the following will be refactored
+		$blog->id->setValue((int) $id);
+		$year = substr($date, 0, 4);
+		$month = substr($date, 5, 2);
+		$day = substr($date, 8, 2);
+		$hour = substr($date, 11, 2);
+		$minute = substr($date, 14, 2);
+		$second = substr($date, 17, 2);
+		$blog->date->setValue($year, $month, $day, $hour, $minute, $second);
+		// the above will be refactored
+		$blog->title->setValue($title);
+		$blog->body->setValue($body);
+		
+		if($blogDb->save($blog)) {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
@@ -56,7 +82,7 @@ class AdminController extends Controller {
 		
 		$blogDb = new BlogDb;
 		$blogCommentDb = new BlogCommentDb;
-		if($blogDb->deleteBlogPost($id)) {
+		if($blogDb->rm($id)) {
 			$blogCommentDb->deleteBlogCommentByBlogId($id);
 			$this->redirect("Admin", "bloglist");
 		}
@@ -74,7 +100,7 @@ class AdminController extends Controller {
 	function blogcommentdeleteAction() {
 		$id = $this->fetchGet("commentId");
 		$blogCommentDb = new BlogCommentDb;
-		if($blogCommentDb->deleteBlogCommentByCommentId($id)) {
+		if($blogCommentDb->rm($id)) {
 			$this->redirect("Admin", "blogcommentlist");
 		}
 		else {
@@ -85,7 +111,7 @@ class AdminController extends Controller {
 	function dictlistAction() {
 		$dictDb = new DictionaryDb;
 		$this->setTemplate("admin/dictlist");
-		$this->setValue("dictArray", $dictDb->getAllDictItems());
+		$this->setValue("dictArray", $dictDb->all());
 	}
 	
 	function dictaddAction() {
@@ -93,10 +119,12 @@ class AdminController extends Controller {
 	}
 	
 	function dictinsertAction() {
-		$term = $this->fetchPost("term");
-		$definition = $this->fetchPost("definition");
+		$dict = new Dictionary;
+		$dict->term->setValue($this->fetchPost("term"));
+		$dict->definition->setValue($this->fetchPost("definition"));
+		
 		$dictDb = new DictionaryDb;
-		if($dictDb->insertNewDictItem($term, $definition)) {
+		if($dictDb->save($dict)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
@@ -109,15 +137,18 @@ class AdminController extends Controller {
 		$this->setTemplate("admin/dicteditform");
 
 		$dictDb = new DictionaryDb;
-		$this->setValue("dict", $dictDb->getDictById($id));
+		$this->setValue("dict", $dictDb->get($id));
 	}
 	
 	function dictupdateAction() {
-		$id = $this->fetchPost("id");
-		$definition = $this->fetchPost("definition");
+		$dict = new Dictionary;
+		$dict->id->setValue((int)$this->fetchPost("id"));
+		$dict->definition->setValue($this->fetchPost("definition"));
 		
 		$dictDb = new DictionaryDb;
-		if($dictDb->updateCurrentDictItem($id, $definition)) {
+		$term = $dictDb->get((int)$this->fetchPost("id"))->term->getValue();
+		$dict->term->setValue($term);
+		if($dictDb->save($dict)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
@@ -128,7 +159,7 @@ class AdminController extends Controller {
 	function dictdeleteAction() {
 		$id = $this->fetchGet("id");
 		$dictDb = new DictionaryDb;
-		if($dictDb->deleteDictionaryById($id)) {
+		if($dictDb->rm($id)) {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
