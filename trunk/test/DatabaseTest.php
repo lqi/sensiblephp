@@ -19,13 +19,13 @@ INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `te
 VALUES (NULL, '2009-9-9', '9:9:9', '2009-9-9 9:9:9', 'Second', 'This is the second item.')
 */
 
-class Mock {
-	private $integer;
-	private $date;
-	private $time;
-	private $datetime;
-	private $string;
-	private $text;
+class Mock extends Model {
+	protected $integer;
+	protected $date;
+	protected $time;
+	protected $datetime;
+	protected $string;
+	protected $text;
 	
 	public function __construct() {
 		$this->integer = new IntegerField;
@@ -34,16 +34,7 @@ class Mock {
 		$this->time = new TimeField;
 		$this->string = new StringField;
 		$this->text = new TextField;
-	}
-	
-	public function __set($key, $value) {
-		if(is_resource($key))
-			throw new Exception('Exception: Attribute Not Found.');
-		$key = $value;
-	}
-
-	public function __get($key) {
-		return $this->$key;
+		$this->setPKField("integer");
 	}
 }
 
@@ -214,5 +205,28 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			return;
 		}
 		$this->fail("Exception expected: with illigal confirm message");
+	}
+	
+	function testInsertNewItem() {
+		$mock = new Mock;
+		$mock->datetime->setValue(date("Y"),date("m"),date("d"),
+								date("H"),date("i"),date("s"));
+		$mock->date->setValue(date("Y"),date("m"),date("d"));
+		$mock->time->setValue(date("H"),date("i"),date("s"));
+		$mock->string->setValue("String Test");
+		$mock->text->setValue("Text Test");
+		$this->assertTrue($this->mockDb->save($mock));
+	}
+	
+	function testUpdateCurrentItem() {
+		$mock = new Mock;
+		$mock->integer->setValue(1);
+		$mock->datetime->setValue(date("Y"),date("m"),date("d"),
+								date("H"),date("i"),date("s"));
+		$mock->date->setValue(date("Y"),date("m"),date("d"));
+		$mock->time->setValue(date("H"),date("i"),date("s"));
+		$mock->string->setValue("String Test");
+		$mock->text->setValue("Text Test");
+		$this->assertTrue($this->mockDb->save($mock));
 	}
 }

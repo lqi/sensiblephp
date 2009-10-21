@@ -25,5 +25,9 @@ class DatetimeField extends Fields {
 	function getValue() {
 		return $this->date->getValue() . " " . $this->time->getValue();
 	}
+	
+	function setYmdHisValue() {
+		
+	}
 }
 ?>

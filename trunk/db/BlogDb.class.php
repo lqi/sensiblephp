@@ -13,17 +13,36 @@ class BlogDb extends Database {
 	}
 	
 	function insertNewBlogPost($date, $title, $body) {
-		$sql = "INSERT INTO `blog` (`date`, `title`, `body`) " .
-			   "VALUES ('" . $date . "', '" . $title . "', '" . $body . "')";
-		$rs = $this->execute($sql);
-		return $rs;
+		$blog = new Blog;
+		//the following will be refactored
+		$year = substr($date, 0, 4);
+		$month = substr($date, 5, 2);
+		$day = substr($date, 8, 2);
+		$hour = substr($date, 11, 2);
+		$minute = substr($date, 14, 2);
+		$second = substr($date, 17, 2);
+		$blog->date->setValue($year, $month, $day, $hour, $minute, $second);
+		// the above will be refactored
+		$blog->title->setValue($title);
+		$blog->body->setValue($body);
+		return $this->save($blog);
 	}
 	
-	function updateBlogPost($id, $title, $body) {
-		$sql = "UPDATE `blog` SET `title`='" . $title . "', `body`='" . $body . "'" .
-			   "WHERE `id`=" . $id;
-		$rs = $this->execute($sql);
-		return $rs;
+	function updateBlogPost($id, $date, $title, $body) {
+		$blog = new Blog;
+		//the following will be refactored
+		$blog->id->setValue((int) $id);
+		$year = substr($date, 0, 4);
+		$month = substr($date, 5, 2);
+		$day = substr($date, 8, 2);
+		$hour = substr($date, 11, 2);
+		$minute = substr($date, 14, 2);
+		$second = substr($date, 17, 2);
+		$blog->date->setValue($year, $month, $day, $hour, $minute, $second);
+		// the above will be refactored
+		$blog->title->setValue($title);
+		$blog->body->setValue($body);
+		return $this->save($blog);
 	}
 	
 	function deleteBlogPost($id) {
