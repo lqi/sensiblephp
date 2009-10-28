@@ -1,0 +1,31 @@
+Total: 37 out of 40 points
+
+General comments:
+Glad to see you've taken a stab at test cases.
+In exception tests like testGetValueFromNoExistKey,
+move the fail as the last statement within try.
+Also, catch a more specific exception than Exception type.
+
+Don't place multiple asserts in one test. Instead write
+separate tests.
+
+You have written tests on the mocks. That makes no sense.
+Mocks help test other pieces of code and there should be
+no reason to write tests on the mocks. ModelTest.php is
+strange for that reason.
+
+Design: What I like and what needs to be improved:
+
+getValueObjectFromPDOResultRowArray method is a smell.
+Can you use polymorphism and eliminate the series of
+if conditions?
+
+I fail to see why fetchValueFromArray would be a
+method on a controller? How does it make the controller
+cohesive. What does a controller have to do with
+getting stuff from an array? And is it an array or
+more of a hashmap? It appears that this method
+could go into a later below or at least be private.                        
+
+Code quality:
+Any reason why DateField can't use DateTime class?
