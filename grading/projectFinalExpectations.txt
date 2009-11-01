@@ -1,0 +1,24 @@
+For your project, as next step focus on stabilizing features and
+improving the design and code quality. Here are the things I like
+to get from you:
+
+1. Working code you have developed until the deadline (see below).
+2. Value of A, I, and D' for each package and overall (feel free to use
+        any tool like JDepend, NDepend, ... or hand calculate)
+3. Code coverage numbers (you can integrate a coverage tool that can
+        be run on your code so we can see the coverage result). This will
+        tell how much of your code is tested.
+4. A short writeup (check it in to docs directory) of principles and
+        patterns you have used (do not use principles or patterns for
+        the sake of reporting as a wrong use will affect your grades).
+        Explain in few words where you used and why?
+5. During the schedule demo time on November 30th: 
+    Show the project features and also mention the what you are proud of and 
+    what you think needs to be improved. The format is free, but I would much 
+    rather hear you and see the demo of your project than look at 
+    powerpoint slides.
+
+Deadline for code and report is November 30th 5:30PM (you will not be able
+to check in anything to your project repository after this time)
+
+If you have any questions, please let me know.
