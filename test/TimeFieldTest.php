@@ -13,13 +13,22 @@ class TimeFieldTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals("TimeField", $this->timeField->getFieldType());
 	}
 	
-	public function testSetTime() {
+	public function testSetTimeHour() {
 		$this->timeField = new TimeField(12, 6, 26);
 		$this->assertEquals(12, $this->timeField->getHour_G());
-		$this->assertEquals(6, $this->timeField->getMinute_org());
-		$this->assertEquals(26, $this->timeField->getSecond_org());
 	}
 	
+	public function testSetTimeMinute() {
+		$this->timeField = new TimeField(12, 6, 26);
+		$this->assertEquals(6, $this->timeField->getMinute_org());
+	}
+
+
+	public function testSetTimeMinuteSecond() {
+		$this->timeField = new TimeField(12, 6, 26);
+		$this->assertEquals(26, $this->timeField->getSecond_org());
+	}
+
 	public function testSetDefaultMidnightTime() {
 		$this->assertEquals(0, $this->timeField->getHour_G());
 		$this->assertEquals(0, $this->timeField->getMinute_org());
