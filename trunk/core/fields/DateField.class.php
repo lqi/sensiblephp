@@ -49,5 +49,12 @@ class DateField extends Fields {
 	function getValue() {
 		return date("Y-m-d", mktime(0, 0, 0, $this->month, $this->day, $this->year));
 	}
+	
+	function processingPDOValue($value) {
+		$year = substr($value, 0, 4);
+		$month = substr($value, 5, 2);
+		$day = substr($value, 8, 2);
+		$this->setValue($year, $month, $day);
+	}
 }
 ?>

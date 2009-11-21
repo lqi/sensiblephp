@@ -12,6 +12,10 @@ class IntegerField extends Fields {
 		$this->value = $number;
 	}
 	
+	function processingPDOValue($value) {
+		$this->setValue((int) $value);
+	}
+	
 	function getValue() {
 		return $this->getOriginalValue();
 	}

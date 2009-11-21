@@ -1,5 +1,5 @@
 <?php
-class Controller {
+abstract class Controller {
 	private $view;
 
 	function Controller() {

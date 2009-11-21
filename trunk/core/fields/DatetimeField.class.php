@@ -26,8 +26,14 @@ class DatetimeField extends Fields {
 		return $this->date->getValue() . " " . $this->time->getValue();
 	}
 	
-	function setYmdHisValue() {
-		
+	function processingPDOValue($value) {
+		$year = substr($value, 0, 4);
+		$month = substr($value, 5, 2);
+		$day = substr($value, 8, 2);
+		$hour = substr($value, 11, 2);
+		$minute = substr($value, 14, 2);
+		$second = substr($value, 17, 2);
+		$this->setValue($year, $month, $day, $hour, $minute, $second);
 	}
 }
 ?>

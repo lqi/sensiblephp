@@ -35,7 +35,14 @@ abstract class Database {
 	}
 	
 	private function valueObject($array) {
-		return $this->getValueObjectFromPDOResultRowArray($array);
+		$model = $this->getModelName();
+		$valueObject = new $model;
+		foreach($array as $key=>$value) {
+			if (is_int($key))
+				continue;
+			$valueObject->$key->processingPDOValue($value);
+		}
+		return $valueObject;
 	}
 	
 	private function getModelName() {
@@ -44,49 +51,6 @@ abstract class Database {
 
 	private function getTableName() {
 		return strtolower($this->getModelName());
-	}
-	
-	private function getValueObjectFromPDOResultRowArray($array) { //need refactor
-		$model = $this->getModelName();
-		$valueObject = new $model;
-		foreach($array as $key=>$value) {
-			if (is_int($key))
-				continue;
-			if ($valueObject->$key->getFieldType() == "IntegerField") {
-				$valueObject->$key->setValue((int) $value);
-				continue;
-			}
-			if ($valueObject->$key->getFieldType() == "StringField" ||
-				$valueObject->$key->getFieldType() == "TextField") {
-					$valueObject->$key->setValue($value);
-					continue;
-			}
-			if ($valueObject->$key->getFieldType() == "DateField") {
-				$year = substr($value, 0, 4);
-				$month = substr($value, 5, 2);
-				$day = substr($value, 8, 2);
-				$valueObject->$key->setValue($year, $month, $day);
-				continue;
-			}
-			if ($valueObject->$key->getFieldType() == "TimeField") {
-				$hour = substr($value, 0, 2);
-				$minute = substr($value, 3, 2);
-				$second = substr($value, 6, 2);
-				$valueObject->$key->setValue($hour, $minute, $second);
-				continue;
-			}
-			if ($valueObject->$key->getFieldType() == "DatetimeField") {
-				$year = substr($value, 0, 4);
-				$month = substr($value, 5, 2);
-				$day = substr($value, 8, 2);
-				$hour = substr($value, 11, 2);
-				$minute = substr($value, 14, 2);
-				$second = substr($value, 17, 2);
-				$valueObject->$key->setValue($year, $month, $day, $hour, $minute, $second);
-				continue;
-			}
-		}
-		return $valueObject;
 	}
 	
 	private function query($statement) {

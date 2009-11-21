@@ -1,5 +1,5 @@
 <?php
-class Model {
+abstract class Model {
 	private $primaryKey;
 
 	public function __get($key) {
