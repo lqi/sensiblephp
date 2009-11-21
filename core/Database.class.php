@@ -17,7 +17,7 @@ abstract class Database {
 		$this->connection();
 	}
 	
-	function connection() {
+	private function connection() {
 		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;	
 		try {
 			$this->setDbConnection(new PDO($conn, $this->user, $this->password));
@@ -26,20 +26,28 @@ abstract class Database {
 		}
 	}
 	
-	function db() {
+	private function db() {
 		return $this->dbh;
 	}
 	
-	function setDbConnection($dbh) {
+	private function setDbConnection($dbh) {
 		$this->dbh = $dbh;
 	}
 	
-	function valueObject($array) {
+	private function valueObject($array) {
 		return $this->getValueObjectFromPDOResultRowArray($array);
 	}
 	
-	private function getValueObjectFromPDOResultRowArray($array) {
-		$model = substr(get_class($this), 0, -2);
+	private function getModelName() {
+		return substr(get_class($this), 0, -2);
+	}
+
+	private function getTableName() {
+		return strtolower($this->getModelName());
+	}
+	
+	private function getValueObjectFromPDOResultRowArray($array) { //need refactor
+		$model = $this->getModelName();
 		$valueObject = new $model;
 		foreach($array as $key=>$value) {
 			if (is_int($key))
@@ -81,19 +89,15 @@ abstract class Database {
 		return $valueObject;
 	}
 	
-	function query($statement) {
+	private function query($statement) {
 		return $this->db()->query($statement);
 	}
 	
-	function execute($statement) {
+	private function execute($statement) {
 		return $this->db()->exec($statement);
 	}
 	
-	function getTableName() {
-		return strtolower(substr(get_class($this), 0, -2));
-	}
-	
-	function getPKName() {
+	private function getPKName() {
 		$sql = "DESCRIBE `" . $this->getTableName() . "`";
 		$rs = $this->query($sql)->fetchAll();
 		foreach($rs as $row) {
@@ -104,8 +108,11 @@ abstract class Database {
 		throw Exception ("Exception: No Primary Key found!");
 	}
 	
-	function all() {
-		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` DESC";
+	function select($statement = null) {
+		$sql = "SELECT * FROM `" . $this->getTableName() . "`";
+		if ($statement != null) {
+			$sql = $sql . " " . $statement;
+		}
 		$array = array();
 		foreach($this->query($sql) as $row) {
 			$array[] = $this->valueObject($row);
@@ -113,12 +120,13 @@ abstract class Database {
 		return $array;
 	}
 	
+	function all() {
+		return $this->select("ORDER BY `" . $this->getPKName() . "` DESC");
+	}
+	
 	function get($pk) {
-		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` = " . $pk;
-		foreach($this->query($sql) as $row) {
-			$array = $this->valueObject($row);
-		}
-		return $array;
+		$array = $this->select("WHERE `" . $this->getPKName() . "` = " . $pk);
+		return $array[0];
 	}
 	
 	function filter($left = null, $right = null) { // Thinking about how to rename these two
@@ -139,18 +147,18 @@ abstract class Database {
 		else {
 			throw new Exception("Exception: Unhandled exception!");
 		}
-		$sql = "SELECT * FROM `" . $this->getTableName() . "` ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length;
-		$array = array();
-		foreach($this->query($sql) as $row) {
-			$array[] = $this->valueObject($row);
+		return $this->select("ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length);
+	}
+	
+	function delete($statement = null) {
+		if ($statement == null) {
+			$statement = "";
 		}
-		return $array;
+		return $this->execute("DELETE FROM `" . $this->getTableName() . "` " . $statement);
 	}
 	
 	function rm($pk) {
-		$sql = "DELETE FROM `" . $this->getTableName() . "` WHERE `" . $this->getPKName() . "`=" . $pk;
-		$rs = $this->execute($sql);
-		return $rs;
+		return $this->delete("WHERE `" . $this->getPKName() . "`=" . $pk);
 	}
 	
 	function create($confirmMessage = null) {
@@ -185,8 +193,7 @@ abstract class Database {
 			$valueString = substr($valueString, 0, -2);
 			$sql = "INSERT INTO `" . $model->getTableName() . "` (" . $keyString . ") " .
 				   "VALUES (" . $valueString . ")";
-			$rs = $this->execute($sql);
-			if ($rs) {
+			if ($this->execute($sql)) {
 				return true;
 			}
 		}
@@ -198,8 +205,7 @@ abstract class Database {
 			$setString = substr($setString, 0, -2);
 			$sql = "UPDATE `" . $model->getTableName() . "` SET " . $setString . 
 					" WHERE `" . $model->getPKField() . "`=" . $model->pk->getValue();
-			$rs = $this->execute($sql);
-			if ($rs) {
+			if ($this->execute($sql)) {
 				return true;
 			}
 		}

@@ -28,7 +28,7 @@ class View {
 	function getValue($key) {
 		if (isset($this->vars[$key]))
 			return $this->vars[$key];
-		throw new Exception("Exception: fail in getting value from current key word.");
+		return false;
 	}
 }
 ?>
