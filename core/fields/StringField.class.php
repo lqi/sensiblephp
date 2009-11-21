@@ -34,5 +34,9 @@ class StringField extends Fields {
 	function getOriginalValue() {
 		return $this->value;
 	}
+
+	function processingPDOValue($value) {
+		$this->setValue($value);
+	}
 }
 ?>

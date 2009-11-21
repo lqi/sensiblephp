@@ -32,5 +32,9 @@ class TextField extends Fields {
 		return $this->value;
 	}
 	
+	function processingPDOValue($value) {
+		$this->setValue($value);
+	}
+	
 //getAbbrValue() for String and Text
 }

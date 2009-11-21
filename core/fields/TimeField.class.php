@@ -37,6 +37,13 @@ class TimeField extends Fields {
 	function getValue() {
 		return date("H:i:s", mktime($this->hour, $this->minute, $this->second, 1, 1, 1970));
 	}
+
+	function processingPDOValue($value) {
+		$hour = substr($value, 0, 2);
+		$minute = substr($value, 3, 2);
+		$second = substr($value, 6, 2);
+		$this->setValue($hour, $minute, $second);
+	}
 	
 }
 ?>
