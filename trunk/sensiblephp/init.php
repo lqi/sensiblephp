@@ -1,8 +1,9 @@
 <?php
 
 	define("PROJECT_DIR", dirname(getcwd()) . "/");
-	define("CORE_DIR", PROJECT_DIR . "core/");
-	define("FIELD_DIR", PROJECT_DIR . "core/fields/");
+	define("SENSIBLE_PHP_DIR", PROJECT_DIR . "sensiblephp/");
+	define("CORE_DIR", SENSIBLE_PHP_DIR . "core/");
+	define("FIELD_DIR", SENSIBLE_PHP_DIR . "fields/");
 	define("CONFIG_DIR", PROJECT_DIR . "conf/");
 	define("MODELS_DIR", PROJECT_DIR . "models/");
 	define("VIEWS_DIR", PROJECT_DIR . "views/");
