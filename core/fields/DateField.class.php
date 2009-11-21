@@ -17,7 +17,7 @@ class DateField extends Fields {
 		$this->setValue($year, $month, $day);
 	}
 	
-	function setValue($year, $month, $day) {
+	function setValue($year = 0, $month = 0, $day = 0) {
 		if ($year == 0 && $month == 0 && $day == 0) {
 			$this->year = (int) date("Y");
 			$this->month = (int) date("n");

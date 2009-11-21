@@ -21,16 +21,9 @@ class BlogController extends Controller {
 		$blogId = (int) $this->fetchGet("blogId");
 		$username = $this->fetchPost("username");
 		$comment = $this->fetchPost("comment");
-		//the following will be refactored
-		$year = date("Y");
-		$month = date("m");
-		$day = date("d");
-		$hour = date("H");
-		$minute = date("i");
-		$second = date("s");
-		// the above will be refactored
+		
 		$blogComment = new BlogComment;
-		$blogComment->date->setValue($year, $month, $day, $hour, $minute, $second);
+		$blogComment->date->setValue();
 		$blogComment->blog_id->setValue($blogId);
 		$blogComment->username->setValue($username);
 		$blogComment->comment->setValue($comment);

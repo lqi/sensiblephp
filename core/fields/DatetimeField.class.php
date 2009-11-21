@@ -11,7 +11,7 @@ class DatetimeField extends Fields {
 		$this->setValue($year, $month, $day, $hour, $minute, $second);
 	}
 	
-	function setValue($year, $month, $day, $hour, $minute, $second) {
+	function setValue($year = 0, $month = 0, $day = 0, $hour = 0, $minute = 0, $second = 0) {
 		if ($year == 0 && $month == 0 && $day == 0 && $hour == 0 && $minute == 0 && $second == 0) {
 			$this->date = new DateField;
 			$this->time = new TimeField;
@@ -27,13 +27,8 @@ class DatetimeField extends Fields {
 	}
 	
 	function processingPDOValue($value) {
-		$year = substr($value, 0, 4);
-		$month = substr($value, 5, 2);
-		$day = substr($value, 8, 2);
-		$hour = substr($value, 11, 2);
-		$minute = substr($value, 14, 2);
-		$second = substr($value, 17, 2);
-		$this->setValue($year, $month, $day, $hour, $minute, $second);
+		$this->date->processingPDOValue(substr($value, 0, 10));
+		$this->time->processingPDOValue(substr($value, 11, 19));
 	}
 }
 ?>
