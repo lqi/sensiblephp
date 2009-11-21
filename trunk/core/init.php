@@ -19,14 +19,18 @@
 		DB_BUSINESS_DIR . PATH_SEPARATOR .
 		get_include_path());
 	
-	date_default_timezone_set(TIMEZONE);
-
-	function __autoload($className) {
-		require("$className.class.php");
+	function getDebugModel() {
+		$generalSettings = new Settings;
+		return ($generalSettings->debug != null) ? $generalSettings->debug : false;
+	}
+	
+	function getTimezone() {
+		$generalSettings = new Settings;
+		return ($generalSettings->timezone != null) ? $generalSettings->timezone : "America/Los_Angeles";
 	}
 	
 	function errorHandler($errno, $errstr, $errfile, $errline) {
-		if (DEBUG) {
+		if (getDebugModel()) {
 	    echo " <b>Error:</b><br />" .
 	 			$errno . "<br />" . 
 				$errstr . "<br />" . 
@@ -40,7 +44,7 @@
 	}
 	
 	function exceptionHandler($exception) {
-		if (DEBUG) {
+		if (getDebugModel()) {
 			echo " <b>Exception:</b><br />" . $exception->getMessage() . "<br />";
 		}
 		else {
@@ -48,6 +52,12 @@
 		}
 		exit();
 	}
+
+	function __autoload($className) {
+		require("$className.class.php");
+	}	
+
+	date_default_timezone_set(getTimezone());
 	
 	set_error_handler("errorHandler");
 	set_exception_handler('exceptionHandler');

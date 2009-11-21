@@ -8,7 +8,7 @@ abstract class Database {
 	private $dbh;
 	
 	function Database() {
-		$dbConf = new DbConf;
+		$dbConf = new Settings;
 		$this->host = ($dbConf->host != null) ? $dbConf->host : "localhost";
 		$this->port = ($dbConf->port != null) ? ":" . $dbConf->port : null;
 		$this->user = ($dbConf->user != null) ? $dbConf->user : null;
