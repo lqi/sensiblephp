@@ -16,11 +16,10 @@ class Router {
 		else {
 			$module = "index";
 		}
-		
 
 		$class = $controller . "Controller";
 		$controller = new $class;
-		$method = "{$module}Action";
+		$method = $module . "Action";
 		$controller->$method();
 		$controller->go();		
 	}
