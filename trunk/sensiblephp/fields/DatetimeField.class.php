@@ -3,10 +3,6 @@ class DatetimeField extends Fields {
 	private $date;
 	private $time;
 	
-	function getFieldType() {
-		return "DatetimeField";
-	}
-	
 	function DatetimeField($year = 0, $month = 0, $day = 0, $hour = 0, $minute = 0, $second = 0) {
 		$this->setValue($year, $month, $day, $hour, $minute, $second);
 	}
@@ -29,6 +25,10 @@ class DatetimeField extends Fields {
 	function processingPDOValue($value) {
 		$this->date->processingPDOValue(substr($value, 0, 10));
 		$this->time->processingPDOValue(substr($value, 11, 19));
+	}
+	
+	function createTableSqlStmt() {
+		return "datetime NOT NULL";
 	}
 }
 ?>

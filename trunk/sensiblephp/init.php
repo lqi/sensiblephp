@@ -1,9 +1,10 @@
 <?php
 
-	define("PROJECT_DIR", dirname(getcwd()) . "/");
+	define("PROJECT_DIR", dirname(dirname(__file__)) . "/");
 	define("SENSIBLE_PHP_DIR", PROJECT_DIR . "sensiblephp/");
 	define("CORE_DIR", SENSIBLE_PHP_DIR . "core/");
 	define("FIELD_DIR", SENSIBLE_PHP_DIR . "fields/");
+	define("ADMIN_BIN_DIR", SENSIBLE_PHP_DIR . "admin/");
 	define("CONFIG_DIR", PROJECT_DIR . "conf/");
 	define("MODELS_DIR", PROJECT_DIR . "models/");
 	define("VIEWS_DIR", PROJECT_DIR . "views/");
@@ -12,7 +13,8 @@
 	
 	set_include_path(
 		CORE_DIR . PATH_SEPARATOR .
-		FIELD_DIR . PATH_SEPARATOR . 
+		FIELD_DIR . PATH_SEPARATOR .
+		ADMIN_BIN_DIR . PATH_SEPARATOR .
 		CONFIG_DIR . PATH_SEPARATOR .
 		CONTROLLERS_DIR . PATH_SEPARATOR . 
 		VIEWS_DIR . PATH_SEPARATOR . 
@@ -36,7 +38,7 @@
 	 			$errno . "<br />" . 
 				$errstr . "<br />" . 
 				$errfile . "<br />" .
-				$errline . "<br />";
+				"Error line: " . $errline . "<br />";
 		}
 		else {
 			exceptionHandler("");
@@ -63,7 +65,9 @@
 	set_error_handler("errorHandler");
 	set_exception_handler('exceptionHandler');
 	
-	$router = new Router;
-	$router->route();
+	function init() {
+		$router = new Router;
+		$router->route();
+	}
 	
 ?>

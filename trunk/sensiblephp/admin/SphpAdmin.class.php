@@ -7,7 +7,8 @@ class SphpAdmin
 			"clean_project",
 			"init_project",
 			"create_app",
-			"settings_wizard"
+			"settings_wizard",
+			"dbsync_app"
 		);
 	}
 	
@@ -29,7 +30,7 @@ class SphpAdmin
 	}
 	
 	function projectRoot() {
-		return getcwd() . "/";
+		return dirname(dirname(dirname(__file__))) . "/";
 	}
 	
 	function trashPath() {
@@ -217,6 +218,24 @@ class SphpAdmin
 		echo "Wizard has generated settings file in 'conf' folder.\n";
 	}
 	
+	function dbsync_app($appName = null) {
+		if($appName == null) {
+			echo "No app name given. Type 'sphpadmin.php help dbsync_app' for help.\n";
+		}
+		else {
+			if(file_exists($this->projectRoot() . "models/" . $appName . ".class.php")) {
+				$dbClassName = $appName . "Db";
+				$dbObject = new $dbClassName;
+				if($dbObject->create()) {
+					echo "Database for '" . $appName . "' sync is done.\n";
+				}
+			}
+			else {
+				echo "App '" . $appName . "' doesn't exist.\n";
+			}
+		}
+	}
+	
 	function helphelp() {
 		echo "usage: sphpadmin.php <subcommand> [args]\n\n";
 
@@ -246,5 +265,10 @@ class SphpAdmin
 	function helpsettings_wizard() {
 		echo "usage: sphpadmin.php settings_wizard\n";
 		echo "A command line based settings wizard will help user configurating the settings.\n";
+	}
+
+	function helpdbsync_app() {
+		echo "usage: sphpadmin.php dbsync_app app_name\n";
+		echo "Database sync command.\n";
 	}
 }

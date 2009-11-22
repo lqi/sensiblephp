@@ -8,7 +8,7 @@ abstract class Database {
 	private $dbh;
 	
 	function Database() {
-		$dbConf = new DbConf;
+		$dbConf = new Settings;
 		$this->host = ($dbConf->host != null) ? $dbConf->host : "localhost";
 		$this->port = ($dbConf->port != null) ? ":" . $dbConf->port : null;
 		$this->user = ($dbConf->user != null) ? $dbConf->user : null;
@@ -18,7 +18,7 @@ abstract class Database {
 	}
 	
 	private function connection() {
-		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;	
+		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;
 		try {
 			$this->setDbConnection(new PDO($conn, $this->user, $this->password));
 		} catch (Exception $ex) {
@@ -125,24 +125,25 @@ abstract class Database {
 		return $this->delete("WHERE `" . $this->getPKName() . "`=" . $pk);
 	}
 	
-	function create($confirmMessage = null) {
-		if ($confirmMessage == null) {
-			throw new Exception("Exception: `CREATE TABLE` confirm Message needed!");
+	function createTableSqlStmt() {
+		$modelName = $this->getModelName();
+		$model = new $modelName;
+		$sqlStmt = "CREATE TABLE `" . $this->getTableName() . "` (";
+		$pkName = $model->getPKField();
+		$sqlStmt = $sqlStmt . "`" . $pkName . "` " . $model->$pkName->createTableSqlStmt() . " AUTO_INCREMENT,";
+		foreach($model->getVarsWithoutPK() as $attribute) {
+			$sqlStmt = $sqlStmt . "`" . $attribute . "` " . $model->$attribute->createTableSqlStmt() . ",";
 		}
-		if ($confirmMessage == "CREATE") {
-			return "SUCCESS";
-		}
-		throw new Exception("Exception: Illigal `CREATE TABLE` confirm message!");
+		$sqlStmt = $sqlStmt . "PRIMARY KEY (`" . $pkName . "`))";
+		return $sqlStmt;
 	}
 	
-	function drop($confirmMessage = null) {
-		if ($confirmMessage == null) {
-			throw new Exception("Exception: `DROP TABLE` confirm Message needed!");
+	function create() {
+		$sqlStmt = $this->createTableSqlStmt();
+		if(!$this->execute($sqlStmt)) {
+			return true;
 		}
-		if ($confirmMessage == "DROP") {
-			return "SUCCESS";
-		}
-		throw new Exception("Exception: Illigal `DROP TABLE` confirm message!");
+		throw new Exception("Exception: Error in creating table in the remote database.");
 	}
 	
 	function save($model) {

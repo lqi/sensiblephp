@@ -2,10 +2,6 @@
 class IntegerField extends Fields {
 	private $value;
 	
-	function getFieldType() {
-		return "IntegerField";
-	}
-	
 	function setValue($number) {
 		if (!is_int($number))
 			throw new Exception('Exception: Set illegal input to Integer Field.');
@@ -22,6 +18,10 @@ class IntegerField extends Fields {
 	
 	function getOriginalValue() {
 		return $this->value;
+	}
+	
+	function createTableSqlStmt() {
+		return "int(11) NOT NULL";
 	}
 }
 ?>

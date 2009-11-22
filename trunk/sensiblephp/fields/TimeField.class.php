@@ -4,10 +4,6 @@ class TimeField extends Fields {
 	private $minute;
 	private $second;
 	
-	function getFieldType() {
-		return "TimeField";
-	}
-	
 	function TimeField($hour = 0, $minute = 0, $second = 0) {
 		$this->setValue($hour, $minute, $second);
 	}
@@ -50,6 +46,10 @@ class TimeField extends Fields {
 		$minute = substr($value, 3, 2);
 		$second = substr($value, 6, 2);
 		$this->setValue($hour, $minute, $second);
+	}
+	
+	function createTableSqlStmt() {
+		return "time NOT NULL";
 	}
 }
 ?>
