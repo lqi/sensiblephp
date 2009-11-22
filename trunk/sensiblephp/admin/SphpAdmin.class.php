@@ -115,6 +115,8 @@ class SphpAdmin
 			$folderPath = $this->projectRoot() . $folder;
 			$this->recreateFolder($folderPath);
 		}
+		
+		$this->settings_wizard();
 	}
 	
 	private function touchModelClass($appName) {
@@ -165,6 +167,54 @@ class SphpAdmin
 				$this->touchControllerClass($appName);
 			}
 		}
+	}
+	
+	function settings_wizard() {
+		echo "Debug model, type 'true' or 'false', leave blank for 'false': ";
+		$debugModel = substr(fgets(STDIN), 0, -1);
+		if ($debugModel != "true") {
+			$debugModel = "false";
+		}
+		echo "Time zone, read 'http://php.net/manual/en/timezones.php' for supported time zones, leave blank for 'America/Los_Angeles': ";
+		$timezone = substr(fgets(STDIN), 0, -1);
+		echo "Database host, leave blank for 'localhost': ";
+		$host = substr(fgets(STDIN), 0, -1);
+		echo "Database port: ";
+		$port = substr(fgets(STDIN), 0, -1);
+		echo "Database username: ";
+		$user = substr(fgets(STDIN), 0, -1);
+		echo "Database password: ";
+		$pwd = substr(fgets(STDIN), 0, -1);
+		echo "Database name: ";
+		$dbname = substr(fgets(STDIN), 0, -1);
+		$file = fopen($this->projectRoot() . "conf/Settings.class.php", 'w');
+		$content = "<?php\nclass Settings {\n" .
+					"\t/*\n" .
+					"\t\tGeneral Settings\n" .
+					"\t*/\n" .
+					"\tprivate \$debug = " . $debugModel . ";\t\t//Debug model, choose true or false\n" .
+					"\tprivate \$timezone = \"" . $timezone . "\";\t\t//Leave blank for \"America/Los_Angeles\"\n" .
+					"\n" .
+					"\t/*\n" .
+					"\t\tDatabase Settings\n" .
+					"\t*/\n" .
+					"\tprivate \$host = \"" . $host . "\";\t\t//Host of Database, leave blank for \"localhost\"\n" .
+					"\tprivate \$port = \"" . $port . "\";\t\t//Port of Database, leave blank for null\n" .
+					"\tprivate \$user = \"" . $user . "\";\t\t//Username of Database, leave blank for null\n" .
+					"\tprivate \$password = \"" . $pwd . "\";\t\t//Password of Database, leave blank for null\n" .
+					"\tprivate \$dbname = \"" . $dbname . "\";\t\t//Database name, leave blank for null\n" .
+					"\n" .
+					"\t/*\n" .
+					"\t\tDon't modify anything below\n" .
+					"\t*/\n" .
+					"\tpublic function __get(\$key) {\n" .
+					"\t\treturn \$this->\$key;\n" .
+					"\t}\n" .
+					"}\n" .
+					"?>";
+		fwrite($file, $content);
+		fclose($file);
+		echo "Wizard has generated settings file in 'conf' folder.\n";
 	}
 	
 	function helphelp() {
