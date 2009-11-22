@@ -2,10 +2,6 @@
 class TextField extends Fields {
 	private $value;
 	
-	function getFieldType() {
-		return "TextField";
-	}
-	
 	function getSafeType() {
 		return htmlentities($this->value);
 	}
@@ -34,6 +30,10 @@ class TextField extends Fields {
 	
 	function processingPDOValue($value) {
 		$this->setValue($value);
+	}
+	
+	function createTableSqlStmt() {
+		return "text NOT NULL";
 	}
 	
 //getAbbrValue() for String and Text

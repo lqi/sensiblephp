@@ -7,10 +7,6 @@ class StringField extends Fields {
 		$this->maxLength = $length;
 	}
 	
-	function getFieldType() {
-		return "StringField";
-	}
-	
 	function getMaxLength() {
 		return $this->maxLength;
 	}
@@ -37,6 +33,10 @@ class StringField extends Fields {
 
 	function processingPDOValue($value) {
 		$this->setValue($value);
+	}
+	
+	function createTableSqlStmt() {
+		return "varchar(" . $this->getMaxLength() . ") NOT NULL";
 	}
 }
 ?>

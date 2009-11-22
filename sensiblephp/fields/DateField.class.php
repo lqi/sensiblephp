@@ -9,10 +9,6 @@ class DateField extends Fields {
 	private $month;
 	private $day;
 	
-	function getFieldType() {
-		return "DateField";
-	}
-	
 	function DateField($year = 0, $month = 0, $day = 0) {
 		$this->setValue($year, $month, $day);
 	}
@@ -55,6 +51,10 @@ class DateField extends Fields {
 		$month = substr($value, 5, 2);
 		$day = substr($value, 8, 2);
 		$this->setValue($year, $month, $day);
+	}
+	
+	function createTableSqlStmt() {
+		return "date NOT NULL";
 	}
 }
 ?>

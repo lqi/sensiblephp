@@ -1,3 +1,4 @@
 <?php
-	require(dirname(getcwd()) . "/sensiblephp/init.php");
+	require(dirname(dirname(__file__)) . "/sensiblephp/init.php");
+	init();
 ?>

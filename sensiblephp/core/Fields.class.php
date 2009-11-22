@@ -1,8 +1,8 @@
 <?php
 abstract class Fields {
-	abstract function getFieldType();
 	abstract function getValue();
 	abstract function processingPDOValue($value);
+	abstract function createTableSqlStmt();
 	
 	function safeValue($value) {
 		return htmlentities($value);
