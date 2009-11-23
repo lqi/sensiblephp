@@ -1,5 +1,5 @@
 <?php
-require_once 'init.php';
+require_once(dirname(dirname(dirname(__file__))) . "/init.php");
  
 class StringFieldTest extends PHPUnit_Framework_TestCase
 {
@@ -7,10 +7,6 @@ class StringFieldTest extends PHPUnit_Framework_TestCase
 	
 	protected function setUp() {
 		$this->stringField = new StringField;
-	}
-	
-	public function testGetType() {
-		$this->assertEquals("StringField", $this->stringField->getFieldType());
 	}
 	
 	public function testMaxLength() {
@@ -54,6 +50,22 @@ class StringFieldTest extends PHPUnit_Framework_TestCase
 			return;
 		}
 		$this->fail('Exception expected: More characters than max length.');
+	}
+	
+	public function testProcessingPDOValue() {
+		$this->stringField->processingPDOValue("Busy building Google Chrome OS!");
+		$this->assertEquals("Busy building Google Chrome OS!", $this->stringField->getValue());
+	}
+	
+	public function testCreateTableSqlStmt() {
+		$correctSqlStmt = "varchar(255) NOT NULL";
+		$this->assertEquals($correctSqlStmt, $this->stringField->createTableSqlStmt());
+	}
+	
+	public function testCreateTableSqlStmtWithDefinedMaxStringLength() {
+		$this->stringField = new StringField(9);
+		$correctSqlStmt = "varchar(9) NOT NULL";
+		$this->assertEquals($correctSqlStmt, $this->stringField->createTableSqlStmt());
 	}
 }
 ?>

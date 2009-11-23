@@ -17,7 +17,7 @@ abstract class Database {
 		$this->connection();
 	}
 	
-	private function connection() {
+	protected function connection() {
 		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;
 		try {
 			$this->setDbConnection(new PDO($conn, $this->user, $this->password));
@@ -26,15 +26,15 @@ abstract class Database {
 		}
 	}
 	
-	private function db() {
+	protected function db() {
 		return $this->dbh;
 	}
 	
-	private function setDbConnection($dbh) {
+	protected function setDbConnection($dbh) {
 		$this->dbh = $dbh;
 	}
 	
-	private function valueObject($array) {
+	protected function valueObject($array) {
 		$model = $this->getModelName();
 		$valueObject = new $model;
 		foreach($array as $key=>$value) {
@@ -45,23 +45,23 @@ abstract class Database {
 		return $valueObject;
 	}
 	
-	private function getModelName() {
+	protected function getModelName() {
 		return substr(get_class($this), 0, -2);
 	}
 
-	private function getTableName() {
+	protected function getTableName() {
 		return strtolower($this->getModelName());
 	}
 	
-	private function query($statement) {
+	protected function query($statement) {
 		return $this->db()->query($statement);
 	}
 	
-	private function execute($statement) {
+	protected function execute($statement) {
 		return $this->db()->exec($statement);
 	}
 	
-	private function getPKName() {
+	protected function getPKName() {
 		$sql = "DESCRIBE `" . $this->getTableName() . "`";
 		$rs = $this->query($sql)->fetchAll();
 		foreach($rs as $row) {
