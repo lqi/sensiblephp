@@ -1,24 +1,6 @@
 <?php
 require_once(dirname(dirname(dirname(__file__))) . "/init.php");
 
-/*
-CREATE TABLE `mock` (
- `integer` int(11) NOT NULL AUTO_INCREMENT,
- `date` date NOT NULL,
- `time` time NOT NULL,
- `datetime` datetime NOT NULL,
- `string` varchar(30) NOT NULL,
- `text` text NOT NULL,
- PRIMARY KEY (`integer`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1
-
-INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
-VALUES (NULL, '2008-8-8', '8:8:8', '2008-8-8 8:8:8', 'First', 'This is the first item.');
-
-INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
-VALUES (NULL, '2009-9-9', '9:9:9', '2009-9-9 9:9:9', 'Second', 'This is the second item.')
-*/
-
 class Mock extends Model {
 	protected $integer;
 	protected $date;
@@ -245,8 +227,8 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$mock->date->processingPDOValue(date("Y-m-d"));
 		$mock->time->processingPDOValue(date("H:i:s"));
 		$mock->string->setValue("String Test");
-		$mock->text->setValue("New item test text.");
+		$mock->text->setValue("Change current item test text.");
 		$this->assertTrue($this->mockDb->save($mock));
-		$this->assertEquals("New item test text.", $this->mockDb->get(1)->text->getValue());
+		$this->assertEquals("Change current item test text.", $this->mockDb->get(1)->text->getValue());
 	}
 }
