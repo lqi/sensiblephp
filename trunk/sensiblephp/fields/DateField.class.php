@@ -14,19 +14,24 @@ class DateField extends Fields {
 	}
 	
 	function setValue($year = 0, $month = 0, $day = 0) {
-		if ($year == 0 && $month == 0 && $day == 0) {
-			$this->year = (int) date("Y");
-			$this->month = (int) date("n");
-			$this->day = (int) date("j");
+		if (is_int($year) && is_int($month) && is_int($day)) {
+			if ($year == 0 && $month == 0 && $day == 0) {
+				$this->year = (int) date("Y");
+				$this->month = (int) date("n");
+				$this->day = (int) date("j");
+			}
+			else {
+				if (!mktime(0, 0, 0, $month, $day, $year))
+					throw new Exception("Exception: Illigal input!");
+				if (!checkdate($month, $day, $year))
+					throw new Exception("Exception: Illigal Date!");
+				$this->year = (int) $year;
+				$this->month = (int) $month;
+				$this->day = (int) $day;
+			}
 		}
 		else {
-			if (!mktime(0, 0, 0, $month, $day, $year))
-				throw new Exception("Exception: Illigal input!");
-			if (!checkdate($month, $day, $year))
-				throw new Exception("Exception: Illigal Date!");
-			$this->year = (int) $year;
-			$this->month = (int) $month;
-			$this->day = (int) $day;
+			throw new Exception("Exception: Illigal input: set letter to DateField.");
 		}
 	}
 	
@@ -47,9 +52,9 @@ class DateField extends Fields {
 	}
 	
 	function processingPDOValue($value) {
-		$year = substr($value, 0, 4);
-		$month = substr($value, 5, 2);
-		$day = substr($value, 8, 2);
+		$year = (int) substr($value, 0, 4);
+		$month = (int) substr($value, 5, 2);
+		$day = (int) substr($value, 8, 2);
 		$this->setValue($year, $month, $day);
 	}
 	

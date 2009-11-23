@@ -1,5 +1,5 @@
 <?php
-require_once 'init.php';
+require_once(dirname(dirname(dirname(__file__))) . "/init.php");
  
 class ViewTest extends PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
 		catch (Exception $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Set no exist template.");
+		$this->fail("Exception expected: Set no existing template.");
 	}
 	
 	function testSetValue() {
@@ -31,13 +31,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
 	
 	function testGetValueFromNoExistKey() {
 		$this->view->setValue("hello", "world");
-		try {
-			$this->view->getValue("world");
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: get value from no exist key.");
+		$this->assertFalse($this->view->getValue("world"));
 	}
 }	
 ?>

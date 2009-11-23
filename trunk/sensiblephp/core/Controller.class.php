@@ -21,7 +21,7 @@ abstract class Controller {
 			header("Location: /$controller");
 	}
 	
-	function fetchValueFromArray($array, $key) {
+	private function fetchValueFromArray($array, $key) {
 		if (isset($array[$key]))
 			return $array[$key];
 		return false;

@@ -1,5 +1,5 @@
 <?php
-require_once 'init.php';
+require_once(dirname(dirname(dirname(__file__))) . "/init.php");
 
 /*
 CREATE TABLE `mock` (

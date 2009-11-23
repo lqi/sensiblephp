@@ -10,7 +10,7 @@ abstract class Model {
 		return $this->$key;
 	}
 	
-	function getPK() {
+	private function getPK() {
 		$pkName = $this->getPKField();
 		return $this->$pkName;
 	}

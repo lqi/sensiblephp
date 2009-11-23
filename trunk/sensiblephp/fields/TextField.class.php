@@ -2,10 +2,6 @@
 class TextField extends Fields {
 	private $value;
 	
-	function getSafeType() {
-		return htmlentities($this->value);
-	}
-	
 	function setValue($value) {
 		if (strlen($value) == 0)
 			throw new Exception('Exception: Empty value.');

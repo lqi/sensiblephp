@@ -18,7 +18,7 @@ class View {
 	function render() {
 		if($this->template) {
 			include(VIEWS_DIR . $this->template . ".php");
-		}		
+		}
 	}
 	
 	function setValue($key, $value) {

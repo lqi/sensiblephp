@@ -1,9 +1,10 @@
 <?php
-require_once 'init.php';
+require_once(dirname(dirname(dirname(__file__))) . "/init.php");
 
-class FieldsMock extends Fields {
-	function getFieldType() {}
+class MockFields extends Fields {
 	function getValue() {}
+	function processingPDOValue($value) {}
+	function createTableSqlStmt() {}
 }
 
 class FieldsTest extends PHPUnit_Framework_TestCase
@@ -11,7 +12,7 @@ class FieldsTest extends PHPUnit_Framework_TestCase
 	private $fields;
 	
 	protected function setUp() {
-		$this->fields = new FieldsMock;
+		$this->fields = new MockFields;
 	}
 	
 	public function testGetSafeValue() {
