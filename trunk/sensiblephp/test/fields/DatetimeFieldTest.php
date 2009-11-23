@@ -147,4 +147,12 @@ class DatetimeFieldTest extends PHPUnit_Framework_TestCase
 	public function testSetTimeSecondOfNow() {
 		$this->assertEquals(date("s"), $this->datetimeField->getSecond_org());
 	}
+	
+	public function testGetDateValue() {
+		$this->assertEquals(date("Y-n-j"), $this->datetimeField->getDateValue());
+	}
+	
+	public function testGetTimeValue() {
+		$this->assertEquals(date("H:i:s"), $this->datetimeField->getTimeValue());
+	}
 }
