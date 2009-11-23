@@ -46,7 +46,31 @@ class MockDb extends Database {
 		} catch (Exception $ex) {
 			echo $ex->getMessage();
 		}
-	}	
+	}
+	
+	function getTableName() {
+		return parent::getTableName();
+	}
+	
+	function getPKName() {
+		return parent::getPKName();
+	}
+	
+	function getModelName() {
+		return parent::getModelName();
+	}
+	
+	function valueObject($array) {
+		return parent::valueObject($array);
+	}
+	
+	function query($stmt) {
+		return parent::query($stmt);
+	}
+	
+	function execute($stmt) {
+		return parent::execute($stmt);
+	}
 }
  
 class DatabaseTest extends PHPUnit_Framework_TestCase {
@@ -54,6 +78,23 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	
 	protected function setUp() {
 		$this->mockDb = new MockDb;
+		$this->initDatabase();
+	}
+	
+	private function initDatabase() {
+		$dropTableStmt = "DROP TABLE `mock`";
+		$this->mockDb->execute($dropTableStmt);
+		$this->mockDb->create();
+		$insertStmt1 = "INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
+			VALUES (NULL, '2008-8-8', '8:8:8', '2008-8-8 8:8:8', 'First', 'This is the first item.')";
+		$this->mockDb->execute($insertStmt1);
+		$insertStmt2 = "INSERT INTO `cents`.`mock` (`integer`, `date`, `time`, `datetime`, `string`, `text`) 
+			VALUES (NULL, '2009-9-9', '9:9:9', '2009-9-9 9:9:9', 'Second', 'This is the second item.')";
+		$this->mockDb->execute($insertStmt2);
+	}
+
+	function testGetModelName() {
+		$this->assertEquals("Mock", $this->mockDb->getModelName());
 	}
 	
 	function testGetTableName() {
@@ -92,23 +133,42 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("2008-02-29 23:00:59", $valueObject->datetime->getValue());
 	}
 	
-	function testGetValueObjectForStringAndTextField() {
+	function testGetValueObjectForStringField() {
 		$array["string"] = "I'll be there at \nten o'clock.";
-		$array["text"] = "Okay, see you \tthen!";
 		$valueObject = $this->mockDb->valueObject($array);
 		$this->assertEquals("I'll be there at \nten o'clock.", $valueObject->string->getOriginalValue());
+	}
+	
+	function testGetValueObjectForTextField() {
+		$array["text"] = "Okay, see you \tthen!";
+		$valueObject = $this->mockDb->valueObject($array);
 		$this->assertEquals("Okay, see you \tthen!", $valueObject->text->getOriginalValue());
 	}
 	
 	function testGetValueObjectForIngoringNumberKey() {
-		$array["date"] = "2008-02-29";
 		$array[1] = "This should be ignored!";
 		$array["integer"] = "1";
 		$valueObject = $this->mockDb->valueObject($array);
 		$this->assertEquals(1, $valueObject->integer->getOriginalValue());
-		$this->assertEquals(2008, $valueObject->date->getYear_Y());
-		$this->assertEquals(2, $valueObject->date->getMonth_n());
-		$this->assertEquals(29, $valueObject->date->getDay_j());
+	}
+	
+	function testSelectWithNoExtraStatement() {
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "`";
+		$array = array();
+		foreach($this->mockDb->query($sql) as $row) {
+			$array[] = $this->mockDb->valueObject($row);
+		}
+		$this->assertEquals($array, $this->mockDb->select());
+	}
+	
+	function testSelectWithExtraStatement() {
+		$stmt = "ORDER BY `" . $this->mockDb->getPKName() . "` DESC";
+		$sql = "SELECT * FROM `" . $this->mockDb->getTableName() . "` " . $stmt;
+		$array = array();
+		foreach($this->mockDb->query($sql) as $row) {
+			$array[] = $this->mockDb->valueObject($row);
+		}
+		$this->assertEquals($array, $this->mockDb->select($stmt));
 	}
 	
 	function testAll() {
@@ -155,78 +215,38 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$this->fail("Exception expected: Error filter input!");
 	}
 	
-	function testRemove() {
+	function testRemoveWithNoExistingPrimaryKey() {
 		$this->assertEquals(0, $this->mockDb->rm(99));
-	} // Only negative test case at the moment, need more
-	
-	function testCreate() {
-		$this->assertEquals("SUCCESS", $this->mockDb->create("CREATE"));
 	}
 	
-	function testCreateWithoutConfirmMessage() {
-		try {
-			$this->mockDb->create();
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: without confirm message.");
+	function testRemove() {
+		$this->assertEquals(1, $this->mockDb->rm(1));
 	}
 	
-	function testCreateWithIlligalConfirmMessage() {
-		try {
-			$this->mockDb->create("somethingElse");
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: with illigal confirm message");
-	}
-	
-	function testDrop() {
-		$this->assertEquals("SUCCESS", $this->mockDb->drop("DROP"));
-	}
-	
-	function testDropWithoutConfirmMessage() {
-		try {
-			$this->mockDb->drop();
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: without confirm message.");
-	}
-	
-	function testDropWithIlligalConfirmMessage() {
-		try {
-			$this->mockDb->drop("somethingElse");
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: with illigal confirm message");
+	function testCreateSqlStatement() {
+		$this->assertEquals("CREATE TABLE `mock` (`integer` int(11) NOT NULL AUTO_INCREMENT,`date` date NOT NULL,`time` time NOT NULL,`datetime` datetime NOT NULL,`string` varchar(255) NOT NULL,`text` text NOT NULL,PRIMARY KEY (`integer`))", $this->mockDb->createTableSqlStmt());
 	}
 	
 	function testInsertNewItem() {
 		$mock = new Mock;
-		$mock->datetime->setValue(date("Y"),date("m"),date("d"),
-								date("H"),date("i"),date("s"));
-		$mock->date->setValue(date("Y"),date("m"),date("d"));
-		$mock->time->setValue(date("H"),date("i"),date("s"));
-		$mock->string->setValue("String Test");
+		$mock->datetime->processingPDOValue(date("Y-m-d H:i:s"));
+		$mock->date->processingPDOValue(date("Y-m-d"));
+		$mock->time->processingPDOValue(date("H:i:s"));
+		$mock->string->setValue("New item test string.");
 		$mock->text->setValue("Text Test");
 		$this->assertTrue($this->mockDb->save($mock));
+		$this->assertEquals("New item test string.", $this->mockDb->get(3)->string->getValue());
 	}
 	
 	function testUpdateCurrentItem() {
 		$mock = new Mock;
 		$mock->integer->setValue(1);
-		$mock->datetime->setValue(date("Y"),date("m"),date("d"),
-								date("H"),date("i"),date("s"));
-		$mock->date->setValue(date("Y"),date("m"),date("d"));
-		$mock->time->setValue(date("H"),date("i"),date("s"));
+		$mock->datetime->processingPDOValue(date("Y-m-d H:i:s"));
+		$mock->date->processingPDOValue(date("Y-m-d"));
+		$mock->time->processingPDOValue(date("H:i:s"));
 		$mock->string->setValue("String Test");
-		$mock->text->setValue("Text Test");
+		$mock->text->setValue("New item test text.");
 		$this->assertTrue($this->mockDb->save($mock));
+		$this->assertEquals("New item test text.", $this->mockDb->get(1)->text->getValue());
 	}
 }
