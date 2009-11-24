@@ -42,7 +42,7 @@ class SphpAdmin
 			exec("mv " . $oldPath . " " . $newPath);
 		}
 		else {
-			throw new Exception("Exception: Old path doesn't exist!");
+			throw new RuntimeException("Exception: Old path doesn't exist!");
 		}
 	}
 

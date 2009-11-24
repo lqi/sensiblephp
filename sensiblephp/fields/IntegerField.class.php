@@ -4,7 +4,7 @@ class IntegerField extends Fields {
 	
 	function setValue($number) {
 		if (!is_int($number))
-			throw new Exception('Exception: Set illegal input to Integer Field.');
+			throw new InvalidArgumentException('InvalidArgumentException: Set illegal input to Integer Field.');
 		$this->value = $number;
 	}
 	

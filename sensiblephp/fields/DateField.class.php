@@ -22,16 +22,16 @@ class DateField extends Fields {
 			}
 			else {
 				if (!mktime(0, 0, 0, $month, $day, $year))
-					throw new Exception("Exception: Illigal input!");
+					throw new InvalidArgumentException("InvalidArgumentException: Illigal input!");
 				if (!checkdate($month, $day, $year))
-					throw new Exception("Exception: Illigal Date!");
+					throw new InvalidArgumentException("InvalidArgumentException: Illigal Date!");
 				$this->year = (int) $year;
 				$this->month = (int) $month;
 				$this->day = (int) $day;
 			}
 		}
 		else {
-			throw new Exception("Exception: Illigal input: set letter to DateField.");
+			throw new InvalidArgumentException("InvalidArgumentException: Illigal input: set letter to DateField.");
 		}
 	}
 	

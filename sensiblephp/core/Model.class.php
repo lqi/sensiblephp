@@ -4,7 +4,7 @@ abstract class Model {
 
 	public function __get($key) {
 		if ($key == "primaryKey")
-			throw new Exception("Exception: No priviledge to get Primary Key attribute.");
+			throw new UnexpectedValueException("UnexpectedValueException: No priviledge to get Primary Key attribute.");
 		if ($key == "pk")
 			return $this->getPK();
 		return $this->$key;
@@ -17,7 +17,7 @@ abstract class Model {
 	
 	function getPKField() {
 		if ($this->primaryKey == null)
-			throw new Exception("Exception: Get primary key without define it.");
+			throw new BadFunctionCallException("BadFunctionCallException: Get primary key without define it.");
 		return $this->primaryKey;
 	}
 	
@@ -28,7 +28,7 @@ abstract class Model {
 				return;
 			}
 		}
-		throw new Exception("Exception: Set illigal attribute to Primary key.");
+		throw new InvalidArgumentException("InvalidArgumentException: Set illigal attribute to Primary key.");
 	}
 	
 	function getVars() {
