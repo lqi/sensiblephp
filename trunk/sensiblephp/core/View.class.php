@@ -8,7 +8,7 @@ class View {
 			$this->template = $template;
 			return;
 		}
-		throw new Exception("Exception: set no exist template file.");
+		throw new InvalidArgumentException("InvalidArgumentException: set no exist template file.");
 	}
 	
 	function getTemplateName() {

@@ -19,7 +19,7 @@ class DatetimeField extends Fields {
 			}
 		}
 		else {
-			throw new Exception("Exception: Illigal input: set letter to DatetimeField.");
+			throw new InvalidArgumentException("InvalidArgumentException: Illigal input: set letter to DatetimeField.");
 		}
 	}
 	

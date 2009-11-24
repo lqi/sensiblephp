@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>test/</title>
+    <title>trunk/sensiblephp/test/</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="container.css">
     <script type="text/javascript" src="yahoo-dom-event.js"></script>
@@ -12,7 +12,7 @@
 
   <body class="yui-skin-sam">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr><td class="title">test/</td></tr>
+      <tr><td class="title">trunk/sensiblephp/test/</td></tr>
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
 
       <tr>
@@ -326,16 +326,16 @@
 <span class="lineNum" id="container17"><a name="17"></a><a href="#17" id="line17">      17</a> </span><span class="lineCov">             79 :             }                                                                                             </span>
 <span class="lineNum" id="container18"><a name="18"></a><a href="#18" id="line18">      18</a> </span>                :             else {                                                                                        
 <span class="lineNum" id="container19"><a name="19"></a><a href="#19" id="line19">      19</a> </span><span class="lineCov">             22 :                 if (!mktime($hour, $minute, $second, 1, 1, 1970))                                         </span>
-<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span><span class="lineCov">             22 :                     throw new Exception(&quot;Exception: Illigal input!&quot;);                                     </span>
+<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span><span class="lineCov">             22 :                     throw new InvalidArgumentException(&quot;InvalidArgumentException: Illigal input!&quot;);       </span>
 <span class="lineNum" id="container21"><a name="21"></a><a href="#21" id="line21">      21</a> </span><span class="lineCov">             22 :                 if ($hour &lt; 0 || $hour &gt; 23 || $minute &lt; 0 || $minute &gt; 59 || $second &lt; 0 || $second &gt; 59)</span>
-<span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span><span class="lineCov">             22 :                     throw new Exception(&quot;Exception: Illigal time!&quot;);                                      </span>
+<span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span><span class="lineCov">             22 :                     throw new InvalidArgumentException(&quot;InvalidArgumentException: Illigal time!&quot;);        </span>
 <span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span><span class="lineCov">             20 :                 $this-&gt;hour = (int) $hour;                                                                </span>
 <span class="lineNum" id="container24"><a name="24"></a><a href="#24" id="line24">      24</a> </span><span class="lineCov">             20 :                 $this-&gt;minute = (int) $minute;                                                            </span>
 <span class="lineNum" id="container25"><a name="25"></a><a href="#25" id="line25">      25</a> </span><span class="lineCov">             20 :                 $this-&gt;second = (int) $second;                                                            </span>
 <span class="lineNum" id="container26"><a name="26"></a><a href="#26" id="line26">      26</a> </span>                :             }                                                                                             
 <span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span><span class="lineCov">             79 :         }                                                                                                 </span>
 <span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span>                :         else {                                                                                            
-<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span><span class="lineCov">              1 :             throw new Exception(&quot;Exception: Illigal input: set letter to TimeField.&quot;);                    </span>
+<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span><span class="lineCov">              1 :             throw new InvalidArgumentException(&quot;Exception: Illigal input: set letter to TimeField.&quot;);     </span>
 <span class="lineNum" id="container30"><a name="30"></a><a href="#30" id="line30">      30</a> </span>                :         }                                                                                                 
 <span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span><span class="lineCov">             79 :     }                                                                                                     </span>
 <span class="lineNum" id="container32"><a name="32"></a><a href="#32" id="line32">      32</a> </span>                :                                                                                                           
@@ -374,7 +374,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Mon Nov 23 16:57:04 PST 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Tue Nov 24 0:07:54 PST 2009.</td></tr>
     </table>
 
     <br />

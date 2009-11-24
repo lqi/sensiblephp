@@ -4,7 +4,7 @@ class TextField extends Fields {
 	
 	function setValue($value) {
 		if (strlen($value) == 0)
-			throw new Exception('Exception: Empty value.');
+			throw new InvalidArgumentException('InvalidArgumentException: Empty value.');
 		$this->value = $value;
 	}
 	

@@ -41,7 +41,7 @@ class AdminController extends Controller {
 	}
 	
 	function blogupdateAction() {
-		$id = $this->fetchPost("blogId");
+		$id = (int) $this->fetchPost("blogId");
 		$title = $this->fetchPost("title");
 		$body = $this->fetchPost("body");
 		
@@ -49,6 +49,7 @@ class AdminController extends Controller {
 		$date = $blogDb->get($id)->date->getValue();
 		
 		$blog = new Blog;
+		$blog->id->setValue($id);
 		$blog->date->processingPDOValue($date);
 		$blog->title->setValue($title);
 		$blog->body->setValue($body);

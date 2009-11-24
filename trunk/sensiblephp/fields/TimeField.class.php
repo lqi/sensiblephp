@@ -17,16 +17,16 @@ class TimeField extends Fields {
 			}
 			else {
 				if (!mktime($hour, $minute, $second, 1, 1, 1970))
-					throw new Exception("Exception: Illigal input!");
+					throw new InvalidArgumentException("InvalidArgumentException: Illigal input!");
 				if ($hour < 0 || $hour > 23 || $minute < 0 || $minute > 59 || $second < 0 || $second > 59)
-					throw new Exception("Exception: Illigal time!");
+					throw new InvalidArgumentException("InvalidArgumentException: Illigal time!");
 				$this->hour = (int) $hour;
 				$this->minute = (int) $minute;
 				$this->second = (int) $second;
 			}
 		}
 		else {
-			throw new Exception("Exception: Illigal input: set letter to TimeField.");
+			throw new InvalidArgumentException("Exception: Illigal input: set letter to TimeField.");
 		}
 	}
 	

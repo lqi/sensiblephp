@@ -89,13 +89,13 @@ abstract class Database {
 			return $this->all();
 		elseif ($left != null && $right == null) {
 			if (!is_int($left))
-				throw new Exception("Exception: Filter length must be an integer!");
+				throw new BadFunctionCallException("BadFunctionCallException: Filter length must be an integer!");
 			$start = 0;
 			$length = $left;
 		}
 		else {
 			if (!(is_int($left)&&is_int($right)))
-				throw new Exception("Exception: Filter start point and length must be integer!");
+				throw new BadFunctionCallException("BadFunctionCallException: Filter start point and length must be integer!");
 			$start = $left;
 			$length = $right;
 		}
@@ -131,7 +131,7 @@ abstract class Database {
 		if(!$this->execute($sqlStmt)) {
 			return true;
 		}
-		throw new Exception("Exception: Error in creating table in the remote database.");
+		throw new RuntimeException("RuntimeException: Error in creating table in the remote database.");
 	}
 	
 	function save($model) {
@@ -159,7 +159,7 @@ abstract class Database {
 		if ($this->execute($sql)) {
 			return true;
 		}
-		throw new Exception("Exception: Error in saving item.");
+		throw new RuntimeException("RuntimeException: Error in saving item.");
 	}
 }
 ?>
