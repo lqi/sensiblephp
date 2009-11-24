@@ -23,11 +23,11 @@ class Mock extends Model {
 class MockDb extends Database {
 	function connection() {
 		$conn = "mysql:host=localhost;dbname=cents";	
-		try {
-			$this->setDbConnection(new PDO($conn, "root", "root"));
-		} catch (Exception $ex) {
-			echo $ex->getMessage();
-		}
+		$this->setDbConnection(new PDO($conn, "root", "root"));
+	}
+	
+	function setDbConnection($dbh) {
+		parent::setDbConnection($dbh);
 	}
 	
 	function getTableName() {
@@ -205,9 +205,27 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(1, $this->mockDb->rm(1));
 	}
 	
+	function testDeleteAll() {
+		$this->assertEquals(2, $this->mockDb->delete());
+	}
+	
+	function testDeleteWithStatement() {
+		$this->assertEquals(1, $this->mockDb->delete("WHERE `integer`=1"));
+	}
+	
 	function testCreateSqlStatement() {
 		$this->assertEquals("CREATE TABLE `mock` (`integer` int(11) NOT NULL AUTO_INCREMENT,`date` date NOT NULL,`time` time NOT NULL,`datetime` datetime NOT NULL,`string` varchar(255) NOT NULL,`text` text NOT NULL,PRIMARY KEY (`integer`))", $this->mockDb->createTableSqlStmt());
 	}
+	/*
+	function testCreateTableException() {
+		try {
+			$this->mockDb->create();
+		}
+		catch(Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: Error in creating Table in remote database.");
+	}*/
 	
 	function testInsertNewItem() {
 		$mock = new Mock;

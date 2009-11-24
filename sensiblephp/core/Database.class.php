@@ -19,11 +19,7 @@ abstract class Database {
 	
 	protected function connection() {
 		$conn = "mysql:host=" . $this->host . $this->port . ";dbname=" . $this->dbname;
-		try {
-			$this->setDbConnection(new PDO($conn, $this->user, $this->password));
-		} catch (Exception $ex) {
-			echo $ex->getMessage();
-		}
+		$this->setDbConnection(new PDO($conn, $this->user, $this->password));
 	}
 	
 	protected function db() {
@@ -62,14 +58,9 @@ abstract class Database {
 	}
 	
 	protected function getPKName() {
-		$sql = "DESCRIBE `" . $this->getTableName() . "`";
-		$rs = $this->query($sql)->fetchAll();
-		foreach($rs as $row) {
-			if($row["Key"] == "PRI") {
-				return $row["Field"];
-			}
-		}
-		throw Exception ("Exception: No Primary Key found!");
+		$modelName = $this->getModelName();
+		$model = new $modelName;
+		return $model->getPKField();
 	}
 	
 	function select($statement = null) {
@@ -102,14 +93,11 @@ abstract class Database {
 			$start = 0;
 			$length = $left;
 		}
-		elseif ($left != null && $right != null) {
+		else {
 			if (!(is_int($left)&&is_int($right)))
 				throw new Exception("Exception: Filter start point and length must be integer!");
 			$start = $left;
 			$length = $right;
-		}
-		else {
-			throw new Exception("Exception: Unhandled exception!");
 		}
 		return $this->select("ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length);
 	}
@@ -158,9 +146,6 @@ abstract class Database {
 			$valueString = substr($valueString, 0, -2);
 			$sql = "INSERT INTO `" . $model->getTableName() . "` (" . $keyString . ") " .
 				   "VALUES (" . $valueString . ")";
-			if ($this->execute($sql)) {
-				return true;
-			}
 		}
 		else { // update current item
 			$setString = "";
@@ -170,9 +155,9 @@ abstract class Database {
 			$setString = substr($setString, 0, -2);
 			$sql = "UPDATE `" . $model->getTableName() . "` SET " . $setString . 
 					" WHERE `" . $model->getPKField() . "`=" . $model->pk->getValue();
-			if ($this->execute($sql)) {
-				return true;
-			}
+		}	
+		if ($this->execute($sql)) {
+			return true;
 		}
 		throw new Exception("Exception: Error in saving item.");
 	}
