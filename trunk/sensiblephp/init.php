@@ -34,11 +34,11 @@
 	
 	function errorHandler($errno, $errstr, $errfile, $errline) {
 		if (getDebugModel()) {
-	    echo " <b>Error:</b><br />" .
-	 			$errno . "<br />" . 
-				$errstr . "<br />" . 
-				$errfile . "<br />" .
-				"Error line: " . $errline . "<br />";
+	    echo "<b>Error:</b><br />\n" .
+				"Error No. " . $errno . "<br />\n" . 
+				"Error information: " . $errstr . "<br />\n" . 
+				"Error file: " . $errfile . "<br />\n" .
+				"Error line: " . $errline . "<br />\n";
 		}
 		else {
 			exceptionHandler("");
@@ -48,7 +48,7 @@
 	
 	function exceptionHandler($exception) {
 		if (getDebugModel()) {
-			echo " <b>Exception:</b><br />" . $exception->getMessage() . "<br />";
+			echo "<b>Exception:</b><br />\n" . $exception->getMessage() . "<br />\n";
 		}
 		else {
 			echo "<h1>Service Unavailable.</h1>";
