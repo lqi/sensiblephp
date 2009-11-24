@@ -38,7 +38,9 @@
 				"Error No. " . $errno . "<br />\n" . 
 				"Error information: " . $errstr . "<br />\n" . 
 				"Error file: " . $errfile . "<br />\n" .
-				"Error line: " . $errline . "<br />\n";
+				"Error line: " . $errline . "<br />\n" .
+				"<hr />\n" .
+				"Reading this means your debug model is on, change it to false in the Settings file, you will get a standard error message.<br />\n";
 		}
 		else {
 			exceptionHandler("");
@@ -48,7 +50,9 @@
 	
 	function exceptionHandler($exception) {
 		if (getDebugModel()) {
-			echo "<b>Exception:</b><br />\n" . $exception->getMessage() . "<br />\n";
+			echo "<b>Exception:</b><br />\n" . $exception->getMessage() . "<br />\n" .
+					"<hr />\n" .
+					"Reading this means your debug model is on, change it to false in the Settings file, you will get a standard error message.<br />\n";
 		}
 		else {
 			echo "<h1>Service Unavailable.</h1>";
