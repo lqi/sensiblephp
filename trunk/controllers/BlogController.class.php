@@ -7,7 +7,7 @@ class BlogController extends Controller {
 	}
 	
 	function blogAction() {
-		$id = $this->fetchGet("id");
+		$id = (int) $this->fetchGet("id");
 		$this->setTemplate("blog/blog");
 		
 		$blogDb = new BlogDb;
@@ -31,9 +31,6 @@ class BlogController extends Controller {
 		$blogCommentDb = new BlogCommentDb;
 		if($blogCommentDb->save($blogComment)) {
 			$this->redirect("Blog", "blog?id=" . $blogId);
-		}
-		else {
-			throw new Exception("Comment Post Error!");
 		}
 	}
 
