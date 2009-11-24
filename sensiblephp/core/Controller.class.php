@@ -21,22 +21,22 @@ abstract class Controller {
 			header("Location: /$controller");
 	}
 	
-	private function parseValueFromArrayObject($array, $key) {
+	private function parseValueFromHTTPHeaderObject($array, $key) {
 		if (isset($array[$key]))
 			return $array[$key];
 		return false;
 	}
 	
 	function fetchGet($key) {
-		return $this->parseValueFromArrayObject($_GET, $key);
+		return $this->parseValueFromHTTPHeaderObject($_GET, $key);
 	}
 	
 	function fetchPost($key) {
-		return $this->parseValueFromArrayObject($_POST, $key);
+		return $this->parseValueFromHTTPHeaderObject($_POST, $key);
 	}
 	
 	function fetchCookie($key) {
-		return $this->parseValueFromArrayObject($_COOKIE, $key);
+		return $this->parseValueFromHTTPHeaderObject($_COOKIE, $key);
 	}
 	
 	function setValue($key, $value) {
