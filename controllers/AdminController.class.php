@@ -27,13 +27,10 @@ class AdminController extends Controller {
 		if($blogDb->save($blog)) {
 			$this->redirect("Admin", "bloglist");
 		}
-		else {
-			throw new Exception("New Blog Post Error!");
-		}
 	}
 	
 	function blogeditAction() {
-		$id = $this->fetchGet("id");
+		$id = (int) $this->fetchGet("id");
 		$this->setTemplate("admin/blogform");
 		
 		$blogDb = new BlogDb;
@@ -57,13 +54,10 @@ class AdminController extends Controller {
 		if($blogDb->save($blog)) {
 			$this->redirect("Admin", "bloglist");
 		}
-		else {
-			throw new Exception("Update Blog Post Error!");
-		}
 	}
 	
 	function blogdeleteAction() {
-		$id = $this->fetchGet("id");
+		$id = (int) $this->fetchGet("id");
 		
 		$blogDb = new BlogDb;
 		$blogCommentDb = new BlogCommentDb;
@@ -83,7 +77,7 @@ class AdminController extends Controller {
 	}
 	
 	function blogcommentdeleteAction() {
-		$id = $this->fetchGet("commentId");
+		$id = (int) $this->fetchGet("commentId");
 		$blogCommentDb = new BlogCommentDb;
 		if($blogCommentDb->rm($id)) {
 			$this->redirect("Admin", "blogcommentlist");
@@ -112,13 +106,10 @@ class AdminController extends Controller {
 		if($dictDb->save($dict)) {
 			$this->redirect("Admin", "dictlist");
 		}
-		else {
-			throw new Exception("Insert New Dict Error!");
-		}
 	}
 	
 	function dicteditAction() {
-		$id = $this->fetchGet("id");
+		$id = (int) $this->fetchGet("id");
 		$this->setTemplate("admin/dicteditform");
 
 		$dictDb = new DictionaryDb;
@@ -127,17 +118,14 @@ class AdminController extends Controller {
 	
 	function dictupdateAction() {
 		$dict = new Dictionary;
-		$dict->id->setValue((int)$this->fetchPost("id"));
+		$dict->id->setValue((int) $this->fetchPost("id"));
 		$dict->definition->setValue($this->fetchPost("definition"));
 		
 		$dictDb = new DictionaryDb;
-		$term = $dictDb->get((int)$this->fetchPost("id"))->term->getValue();
+		$term = $dictDb->get((int) $this->fetchPost("id"))->term->getValue();
 		$dict->term->setValue($term);
 		if($dictDb->save($dict)) {
 			$this->redirect("Admin", "dictlist");
-		}
-		else {
-			throw new Exception("Update Dict Error!");
 		}
 	}
 	
