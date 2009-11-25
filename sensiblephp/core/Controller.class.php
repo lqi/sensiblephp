@@ -3,15 +3,24 @@ abstract class Controller {
 	private $view;
 
 	function Controller() {
-		$this->view = new View;
+		$newView = new View;
+		$this->setView($newView);
+	}
+	
+	protected function setView($newView) {
+		$this->view = $newView;
+	}
+	
+	protected function getView() {
+		return $this->view;
 	}
 	
 	function go() {
-		$this->view->render();
+		$this->getView()->render();
 	}
 
 	function setTemplate($template) {
-		$this->view->setTemplate($template);
+		$this->getView()->setTemplate($template);
 	}
 	
 	function redirect($controller, $module) {
@@ -40,7 +49,7 @@ abstract class Controller {
 	}
 	
 	function setValue($key, $value) {
-		$this->view->setValue($key, $value);
+		$this->getView()->setValue($key, $value);
 	}
 }
 ?>
