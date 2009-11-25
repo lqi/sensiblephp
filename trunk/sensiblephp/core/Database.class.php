@@ -8,13 +8,17 @@ abstract class Database {
 	private $dbh;
 	
 	function Database() {
+		$this->initilizeParameters();
+		$this->connection();
+	}
+	
+	private function initilizeParameters() {
 		$dbConf = new Settings;
 		$this->host = ($dbConf->host != null) ? $dbConf->host : "localhost";
 		$this->port = ($dbConf->port != null) ? ":" . $dbConf->port : null;
 		$this->user = ($dbConf->user != null) ? $dbConf->user : null;
 		$this->password = ($dbConf->password != null) ? $dbConf->password : null;
 		$this->dbname = ($dbConf->dbname != null) ? $dbConf->dbname : null;
-		$this->connection();
 	}
 	
 	protected function connection() {
@@ -63,7 +67,9 @@ abstract class Database {
 		return $model->getPKField();
 	}
 	
-	function select($statement = null) {
+	protected function select($statement = null) {
+		// only database subclass can call this method, 
+		// not allow to call this method by an object of this class.
 		$sql = "SELECT * FROM `" . $this->getTableName() . "`";
 		if ($statement != null) {
 			$sql = $sql . " " . $statement;
@@ -87,22 +93,23 @@ abstract class Database {
 	function filter($left = null, $right = null) { // Thinking about how to rename these two
 		if ($left == null && $right == null)
 			return $this->all();
-		elseif ($left != null && $right == null) {
-			if (!is_int($left))
-				throw new BadFunctionCallException("BadFunctionCallException: Filter length must be an integer!");
+		elseif ($left != null && $right == null && is_int($left)) {
 			$start = 0;
 			$length = $left;
 		}
-		else {
-			if (!(is_int($left)&&is_int($right)))
-				throw new BadFunctionCallException("BadFunctionCallException: Filter start point and length must be integer!");
+		elseif ($left != null && $right != null && is_int($left) && is_int($right)) {
 			$start = $left;
 			$length = $right;
 		}
-		return $this->select("ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length);
+		else {
+			throw new BadFunctionCallException("BadFunctionCallException: Filter parameter must be an integer!");
+		}
+		return $this->select("ORDER BY `" . $this->getPKName() . "` DESC LIMIT " . $start . ", " . $length);		
 	}
 	
-	function delete($statement = null) {
+	protected function delete($statement = null) { 
+		// only database subclass can call this method, 
+		// not allow to call this method by an object of this class.
 		if ($statement == null) {
 			$statement = "";
 		}
@@ -110,7 +117,9 @@ abstract class Database {
 	}
 	
 	function rm($pk) {
-		return $this->delete("WHERE `" . $this->getPKName() . "`=" . $pk);
+		if($this->delete("WHERE `" . $this->getPKName() . "`=" . $pk))
+			return true;
+		throw new RuntimeException("RuntimeException: Error in removing item.");
 	}
 	
 	function createTableSqlStmt() {

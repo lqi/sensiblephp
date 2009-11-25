@@ -53,6 +53,14 @@ class MockDb extends Database {
 	function execute($stmt) {
 		return parent::execute($stmt);
 	}
+	
+	function select($stmt = null) {
+		return parent::select($stmt);
+	}
+	
+	function delete($stmt = null) {
+		return parent::delete($stmt);
+	}
 }
  
 class DatabaseTest extends PHPUnit_Framework_TestCase {
@@ -198,11 +206,17 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	function testRemoveWithNoExistingPrimaryKey() {
-		$this->assertEquals(0, $this->mockDb->rm(99));
+		try {
+			$this->mockDb->rm(99);
+		}
+		catch(Exception $ex) {
+			return;
+		}
+		$this->fail("Exception expected: Error in removing item!");
 	}
 	
 	function testRemove() {
-		$this->assertEquals(1, $this->mockDb->rm(1));
+		$this->assertTrue($this->mockDb->rm(1));
 	}
 	
 	function testDeleteAll() {
