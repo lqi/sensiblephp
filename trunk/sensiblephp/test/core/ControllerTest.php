@@ -1,7 +1,37 @@
 <?php
 require_once(dirname(dirname(dirname(__file__))) . "/init.php");
 
+class MockView extends View {
+	private $goCalledFlag;
+	private $templateName;
+	
+	function MockView() {
+		$this->goCalledFlag = false;
+	}
+	
+	function render() {
+		$this->goCalledFlag = true;
+	}
+	
+	function getGoCalledFlag() {
+		return $this->goCalledFlag;
+	}
+	
+	function setTemplate($name) {
+		$this->templateName = $name;
+	}
+	
+	function getTemplateName() {
+		return $this->templateName;
+	}
+}
+
 class MockController extends Controller {
+	function MockController() {
+		$mockView = new MockView;
+		$this->setView($mockView);
+	}
+	
 	function setGetValue($array) {
 		$_GET = $array;
 	}
@@ -12,6 +42,18 @@ class MockController extends Controller {
 	
 	function setCookieValue($array) {
 		$_COOKIE = $array;
+	}
+	
+	function getValue($key) {
+		return $this->getView()->getValue($key);
+	}
+	
+	function renderWell() {
+		return $this->getView()->getGoCalledFlag();
+	}
+	
+	function getTemplateName() {
+		return $this->getView()->getTemplateName();
 	}
 }
 
@@ -65,6 +107,27 @@ class ControllerTest extends PHPUnit_Framework_TestCase
 		$testArray["a"] = 1;
 		$testArray["b"] = 2;
 		return $testArray;
+	}
+	
+	public function testSetSingleValue() {
+		$this->controller->setValue("hello", "world");
+		$this->assertEquals("world", $this->controller->getValue("hello"));
+	}
+	
+	public function testSetMoreValues() {
+		$this->controller->setValue("hello", "world");
+		$this->controller->setValue("foo", "bar");
+		$this->assertEquals("bar", $this->controller->getValue("foo"));
+	}
+	
+	public function testGo() {
+		$this->controller->go();
+		$this->assertTrue($this->controller->renderWell());
+	}
+	
+	public function testSetTemplate() {
+		$this->controller->setTemplate("template");
+		$this->assertEquals("template", $this->controller->getTemplateName());
 	}
 }
 ?>
