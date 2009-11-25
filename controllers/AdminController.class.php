@@ -66,7 +66,7 @@ class AdminController extends Controller {
 			$this->redirect("Admin", "bloglist");
 		}
 		else {
-			throw new Exception("Delete Blog Post Error!");
+			throw new RuntimeException("RuntimeException: Delete Blog Post Error!");
 		}
 	}
 	
