@@ -17,7 +17,8 @@ class SphpAdmin
 			"controllers",
 			"db",
 			"models",
-			"views"
+			"views",
+			"test"
 		);
 	}
 	
