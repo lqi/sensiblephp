@@ -17,11 +17,11 @@ class ViewTest extends PHPUnit_Framework_TestCase
 	function testSetNoExistTemplate() {
 		try {
 			$this->view->setTemplate("home");
+			$this->fail("Exception expected: Set no existing template.");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Set no existing template.");
 	}
 	
 	function testSetValue() {

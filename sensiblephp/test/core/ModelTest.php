@@ -28,31 +28,31 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 	function testSetErrorAttributeToPKName() {
 		try {
 			$this->mock->setPKField("id");
+			$this->fail("Exception expected: set error attribute to primary key.");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}	
-		$this->fail("Exception expected: set error attribute to primary key.");
 	}
 	
 	function testGetPKFieldDirectly() {
 		try {
 			$this->mock->primaryKey;
+			$this->fail("Exception expected: no priviledge to get primary key directly!");
 		}
-		catch (Exception $ex) {
+		catch (UnexpectedValueException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: no priviledge to get primary key directly!");
 	}
 	
 	function testGetPKFieldWithoutDefineIt() {
 		try {
 			$this->mock->getPKField();
+			$this->fail("Exception expected: Get primary key without define it.");
 		}
-		catch (Exception $ex) {
+		catch (BadFunctionCallException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Get primary key without define it.");
 	}
 
 	function testGetPKObject() {
@@ -64,11 +64,11 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 	function testGetPKObjectWithoutDefineIt() {
 		try {
 			$this->mock->pk;
+			$this->fail("Exception expected: Get PK Object without define it.");
 		}
-		catch (Exception $ex) {
+		catch (BadFunctionCallException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Get PK Object without define it.");
 	}
 	
 	function testGetVars() {

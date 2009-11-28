@@ -198,21 +198,21 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	function testFilterByErrorParameter() {
 		try {
 			$this->mockDb->filter("s", 1);
+			$this->fail("Exception expected: Error filter input!");
 		}
-		catch(Exception $ex) {
+		catch(BadFunctionCallException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error filter input!");
 	}
 	
 	function testRemoveWithNoExistingPrimaryKey() {
 		try {
 			$this->mockDb->rm(99);
+			$this->fail("Exception expected: Error in removing item!");
 		}
-		catch(Exception $ex) {
+		catch(RuntimeException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error in removing item!");
 	}
 	
 	function testRemove() {
@@ -230,16 +230,6 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	function testCreateSqlStatement() {
 		$this->assertEquals("CREATE TABLE `mock` (`integer` int(11) NOT NULL AUTO_INCREMENT,`date` date NOT NULL,`time` time NOT NULL,`datetime` datetime NOT NULL,`string` varchar(255) NOT NULL,`text` text NOT NULL,PRIMARY KEY (`integer`))", $this->mockDb->createTableSqlStmt());
 	}
-	/*
-	function testCreateTableException() {
-		try {
-			$this->mockDb->create();
-		}
-		catch(Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: Error in creating Table in remote database.");
-	}*/
 	
 	function testInsertNewItem() {
 		$mock = new Mock;

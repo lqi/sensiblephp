@@ -34,22 +34,22 @@ class StringFieldTest extends PHPUnit_Framework_TestCase
 	public function testSetEmptyValue() {
 		try {
 			$this->stringField->setValue("");
+			$this->fail('Exception exptected: Empty value.');
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail('Exception exptected: Empty value.');
 	}
 	
 	public function testSetMoreCharactersThanMaxLength() {
 		$this->stringField = new StringField(3);
 		try {
 			$this->stringField->setValue("1234");
+			$this->fail('Exception expected: More characters than max length.');
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail('Exception expected: More characters than max length.');
 	}
 	
 	public function testProcessingPDOValue() {
