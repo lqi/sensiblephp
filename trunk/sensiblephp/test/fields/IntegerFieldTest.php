@@ -17,21 +17,21 @@ class IntegerFieldTest extends PHPUnit_Framework_TestCase
 	function testSetChar() {
 		try {
 			$this->integerField->setValue("a");
+			$this->fail("Exception expected: Set Characters to Integer Field.");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Set Characters to Integer Field.");
 	}
 	
 	function testSetFloat() {
 		try {
 			$this->integerField->setValue(1.11);
+			$this->fail("Exception expected: Set Float to Integer Field.");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Set Float to Integer Field.");
 	}
 	
 	function testProcessingPDOValue() {
@@ -43,17 +43,5 @@ class IntegerFieldTest extends PHPUnit_Framework_TestCase
 		$this->integerField->processingPDOValue("123");
 		$this->assertEquals(123, $this->integerField->getValue());
 	}
-	
-	/* PAY ATTENTION: this test cannot pass at the moment, need modification! - assign to L. Qi
-	function testProcessingPDOErrorString() {
-		try {
-			$this->integerField->processingPDOValue("a");
-		}
-		catch (Exception $ex) {
-			return;
-		}
-		$this->fail("Exception expected: Set characters to Integer Field when processing the Php Database Object.");
-	}
-	*/
 }
 ?>

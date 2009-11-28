@@ -54,21 +54,21 @@ class TimeFieldTest extends PHPUnit_Framework_TestCase
 	public function testErrorInput() {
 		try {
 			$this->timeField = new TimeField("abc", 'd', 100);
+			$this->fail("Exception expected: Error Input!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error Input!");
 	}
 	
 	public function testErrorTimeInput() {
 		try {
 			$this->timeField = new TimeField(24, 60, -1);
+			$this->fail("Exception expected: Error Time!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error Time!");
 	}
 	
 	public function testGetValue() {
@@ -96,11 +96,11 @@ class TimeFieldTest extends PHPUnit_Framework_TestCase
 		$errorTime = "20:21:60";
 		try {
 			$this->timeField->processingPDOValue($errorTime);
+			$this->fail("Exception expected: Suffer error time when processing PRO value!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Suffer error time when processing PRO value!");
 	}
 	
 	public function testCreateTableSqlStmt() {

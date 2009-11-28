@@ -26,21 +26,21 @@ class DatetimeFieldTest extends PHPUnit_Framework_TestCase
 	public function testSetErrorLetterData() {
 		try {
 			$this->datetimeField = new DatetimeField("abc", 0, 0, 0, 0, 0);
+			$this->fail("Exception exptected: Input error - letter data!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception exptected: Input error - letter data!");
 	}
 
 	public function testSetErrorNumbericData() {
 		try {
 			$this->datetimeField = new DatetimeField(-1, 0, 0, 0, 0, 0);
+			$this->fail("Exception exptected: Illegal input in datetimefield!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception exptected: Illegal input in datetimefield!");
 	}
 	
 	public function testProcessingPROValue() {
@@ -53,11 +53,11 @@ class DatetimeFieldTest extends PHPUnit_Framework_TestCase
 		$errorDate = "2009-12-32 20:30:60";
 		try {
 			$this->datetimeField->processingPDOValue($errorDate);
+			$this->fail("Exception expected: Suffer error datetime when processing PRO value!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Suffer error datetime when processing PRO value!");
 	}
 	
 	public function testCreateTableSqlStmt() {

@@ -36,11 +36,11 @@ class TextFieldTest extends PHPUnit_Framework_TestCase
 	public function testSetEmptyText() {
 		try {
 			$this->textField->setValue("");
+			$this->fail("Exception expected: set empty string to TextField.");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: set empty string to TextField.");
 	}
 	
 	public function testProcessingPDOValue() {

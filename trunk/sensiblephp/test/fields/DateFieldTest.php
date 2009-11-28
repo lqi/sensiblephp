@@ -54,21 +54,21 @@ class DateFieldTest extends PHPUnit_Framework_TestCase
 	public function testErrorInput() {
 		try {
 			$this->dateField = new DateField("abc", 0, 32);
+			$this->fail("Exception expected: Error Input!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error Input!");
 	}
 	
 	public function testErrorDateInput() {
 		try {
 			$this->dateField = new DateField(2009, -1, 32);
+			$this->fail("Exception expected: Error Date!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Error Date!");
 	}
 	
 	public function testDateOfLeapYear() {
@@ -95,11 +95,11 @@ class DateFieldTest extends PHPUnit_Framework_TestCase
 		$errorDate = "2009-12-32";
 		try {
 			$this->dateField->processingPDOValue($errorDate);
+			$this->fail("Exception expected: Suffer error date when processing PRO value!");
 		}
-		catch (Exception $ex) {
+		catch (InvalidArgumentException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: Suffer error date when processing PRO value!");
 	}
 	
 	public function testCreateTableSqlStmt() {
