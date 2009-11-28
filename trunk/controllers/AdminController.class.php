@@ -83,7 +83,7 @@ class AdminController extends Controller {
 			$this->redirect("Admin", "blogcommentlist");
 		}
 		else {
-			throw new Exception("Delete Blog Comment Error!");
+			throw new RuntimeException("RuntimeException: Delete Blog Comment Error!");
 		}
 	}
 	
@@ -136,7 +136,7 @@ class AdminController extends Controller {
 			$this->redirect("Admin", "dictlist");
 		}
 		else {
-			throw new Exception("Delete Dictionary Error!");
+			throw new RuntimeException("RuntimeException: Delete Dictionary Error!");
 		}
 	}
 }

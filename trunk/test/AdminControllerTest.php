@@ -175,11 +175,11 @@ class AdminControllerTest extends PHPUnit_Framework_TestCase {
 		$controller = new AdminController;
 		try {
 			$controller->blogdeleteAction();
+			$this->fail("Exception expected: remove error.");
 		}
-		catch(Exception $ex) {
+		catch(RuntimeException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: remove error.");
 	}
 	
 	public function testBlogCommentListAction() {
@@ -201,11 +201,11 @@ class AdminControllerTest extends PHPUnit_Framework_TestCase {
 		$controller = new AdminController;
 		try {
 			$controller->blogcommentdeleteAction();
+			$this->fail("Exception expected: remove error.");
 		}
-		catch(Exception $ex) {
+		catch(RuntimeException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: remove error.");
 	}
 	
 	public function testDictListAction() {
@@ -252,11 +252,11 @@ class AdminControllerTest extends PHPUnit_Framework_TestCase {
 		$controller = new AdminController;
 		try {
 			$controller->dictdeleteAction();
+			$this->fail("Exception expected: remove error.");
 		}
-		catch(Exception $ex) {
+		catch(RuntimeException $ex) {
 			return;
 		}
-		$this->fail("Exception expected: remove error.");
 	}
 }
 ?>
