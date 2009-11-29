@@ -21,11 +21,6 @@ class Mock extends Model {
 }
 
 class MockDb extends Database {
-	function connection() {
-		$conn = "mysql:host=localhost;dbname=cents";	
-		$this->setDbConnection(new PDO($conn, "root", "root"));
-	}
-	
 	function setDbConnection($dbh) {
 		parent::setDbConnection($dbh);
 	}
