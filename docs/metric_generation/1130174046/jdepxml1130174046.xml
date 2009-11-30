@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PDepend>
+  <Packages>
+    <Package name="+global">
+      <Stats>
+        <TotalClasses>24</TotalClasses>
+        <ConcreteClasses>20</ConcreteClasses>
+        <AbstractClasses>4</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0.16666666666667</A>
+        <I>1</I>
+        <D>0.16666666666667</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/var/www/cents.fazey.org/controllers/AdminController.class.php">AdminController</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/models/Blog.class.php">Blog</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/models/BlogComment.class.php">BlogComment</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/db/BlogCommentDb.class.php">BlogCommentDb</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/controllers/BlogController.class.php">BlogController</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/db/BlogDb.class.php">BlogDb</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/DateField.class.php">DateField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/DatetimeField.class.php">DatetimeField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/models/Dictionary.class.php">Dictionary</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/controllers/DictionaryController.class.php">DictionaryController</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/db/DictionaryDb.class.php">DictionaryDb</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/controllers/HomepageController.class.php">HomepageController</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/IntegerField.class.php">IntegerField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/Router.class.php">Router</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/conf/Settings.class.php">Settings</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/admin/SphpAdmin.class.php">SphpAdmin</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/StringField.class.php">StringField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/TextField.class.php">TextField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/fields/TimeField.class.php">TimeField</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/View.class.php">View</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/Controller.class.php">Controller</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/Database.class.php">Database</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/Fields.class.php">Fields</Class>
+        <Class sourceFile="/var/www/cents.fazey.org/sensiblephp/core/Model.class.php">Model</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>+pdo</Package>
+        <Package>+spl</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+  </Packages>
+  <Cycles/>
+</PDepend>

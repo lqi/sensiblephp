@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metrics ahh="0.5" andc="0.66666666666667" calls="311" ccn="270" classes="24" cloc="28" clsa="4" clsc="20" fanout="60" files="25" functions="6" interfs="0" leafs="20" loc="1326" locExecutable="1121" maxdit="1" ncloc="1298" nom="157" nop="1" roots="4">
+  <file name="/var/www/cents.fazey.org/controllers/AdminController.class.php" classes="1" cloc="0" functions="0" loc="143" locExecutable="119" ncloc="143">
+    <class name="AdminController" cis="22" cloc="0" cr="0.15" csz="22" dit="1" impl="0" loc="141" locExecutable="117" ncloc="141" nom="15" rcr="0.181875" vars="0" varsi="0" varsnp="0" wmc="22" wmci="33" wmcnp="22">
+      <method name="blogaddAction" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="blogcommentdeleteAction" ccn="2" cloc="0" loc="10" locExecutable="10" ncloc="10" npath="2"/>
+      <method name="blogcommentlistAction" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="blogdeleteAction" ccn="2" cloc="0" loc="13" locExecutable="12" ncloc="13" npath="2"/>
+      <method name="blogeditAction" ccn="1" cloc="0" loc="7" locExecutable="6" ncloc="7" npath="1"/>
+      <method name="bloginsertAction" ccn="2" cloc="0" loc="14" locExecutable="12" ncloc="14" npath="2"/>
+      <method name="bloglistAction" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="blogupdateAction" ccn="2" cloc="0" loc="18" locExecutable="15" ncloc="18" npath="2"/>
+      <method name="dictaddAction" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="dictdeleteAction" ccn="2" cloc="0" loc="10" locExecutable="10" ncloc="10" npath="2"/>
+      <method name="dicteditAction" ccn="1" cloc="0" loc="7" locExecutable="6" ncloc="7" npath="1"/>
+      <method name="dictinsertAction" ccn="2" cloc="0" loc="10" locExecutable="9" ncloc="10" npath="2"/>
+      <method name="dictlistAction" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="dictupdateAction" ccn="2" cloc="0" loc="12" locExecutable="11" ncloc="12" npath="2"/>
+      <method name="indexAction" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/models/Blog.class.php" classes="1" cloc="0" functions="0" loc="16" locExecutable="15" ncloc="16">
+    <class name="Blog" cis="1" cloc="0" cr="0.15" csz="5" dit="1" impl="0" loc="14" locExecutable="13" ncloc="14" nom="1" rcr="0.1925" vars="4" varsi="4" varsnp="0" wmc="1" wmci="15" wmcnp="1">
+      <method name="__construct" ccn="1" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/models/BlogComment.class.php" classes="1" cloc="0" functions="0" loc="18" locExecutable="17" ncloc="18">
+    <class name="BlogComment" cis="1" cloc="0" cr="0.15" csz="6" dit="1" impl="0" loc="16" locExecutable="15" ncloc="16" nom="1" rcr="0.1925" vars="5" varsi="5" varsnp="0" wmc="1" wmci="15" wmcnp="1">
+      <method name="__construct" ccn="1" cloc="0" loc="8" locExecutable="8" ncloc="8" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/db/BlogCommentDb.class.php" classes="1" cloc="0" functions="0" loc="15" locExecutable="13" ncloc="15">
+    <class name="BlogCommentDb" cis="3" cloc="0" cr="0.15" csz="3" dit="1" impl="0" loc="13" locExecutable="11" ncloc="13" nom="3" rcr="0.1925" vars="0" varsi="0" varsnp="0" wmc="3" wmci="43" wmcnp="3">
+      <method name="deleteBlogCommentByBlogId" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getAllBlogComments" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getCommentsForBlogPost" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/controllers/BlogController.class.php" classes="1" cloc="0" functions="0" loc="39" locExecutable="31" ncloc="39">
+    <class name="BlogController" cis="4" cloc="0" cr="0.15" csz="4" dit="1" impl="0" loc="36" locExecutable="29" ncloc="36" nom="3" rcr="0.181875" vars="0" varsi="0" varsnp="0" wmc="4" wmci="15" wmcnp="4">
+      <method name="blogAction" ccn="1" cloc="0" loc="10" locExecutable="8" ncloc="10" npath="1"/>
+      <method name="indexAction" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="newcommentAction" ccn="2" cloc="0" loc="16" locExecutable="14" ncloc="16" npath="2"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/db/BlogDb.class.php" classes="1" cloc="0" functions="0" loc="4" locExecutable="4" ncloc="4">
+    <class name="BlogDb" cis="0" cloc="0" cr="0.15" csz="0" dit="1" impl="0" loc="2" locExecutable="2" ncloc="2" nom="0" rcr="0.1925" vars="0" varsi="0" varsnp="0" wmc="0" wmci="40" wmcnp="0"/>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/Controller.class.php" classes="1" cloc="0" functions="0" loc="55" locExecutable="44" ncloc="55">
+    <class name="Controller" cis="9" cloc="0" cr="0.66" csz="14" dit="0" impl="0" loc="53" locExecutable="42" ncloc="53" nom="11" rcr="0.15" vars="1" varsi="1" varsnp="0" wmc="13" wmci="13" wmcnp="9">
+      <method name="Controller" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="fetchCookie" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="fetchGet" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="fetchPost" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getView" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="go" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="parseValueFromHTTPHeaderObject" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+      <method name="redirect" ccn="2" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="2"/>
+      <method name="setTemplate" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="setValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="setView" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/Database.class.php" classes="1" cloc="7" functions="0" loc="174" locExecutable="150" ncloc="167">
+    <class name="Database" cis="24" cloc="7" cr="0.5325" csz="52" dit="0" impl="0" loc="172" locExecutable="148" ncloc="165" nom="20" rcr="0.15" vars="6" varsi="6" varsnp="0" wmc="46" wmci="46" wmcnp="24">
+      <method name="Database" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="all" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="connection" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="create" ccn="2" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="2"/>
+      <method name="createTableSqlStmt" ccn="2" cloc="0" loc="12" locExecutable="12" ncloc="12" npath="2"/>
+      <method name="db" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="delete" ccn="2" cloc="2" loc="8" locExecutable="6" ncloc="6" npath="2"/>
+      <method name="execute" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="filter" ccn="10" cloc="1" loc="16" locExecutable="16" ncloc="15" npath="24"/>
+      <method name="get" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="getModelName" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getPKName" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="getTableName" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="initilizeParameters" ccn="6" cloc="0" loc="8" locExecutable="8" ncloc="8" npath="3125"/>
+      <method name="query" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="rm" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+      <method name="save" ccn="5" cloc="2" loc="27" locExecutable="27" ncloc="25" npath="8"/>
+      <method name="select" ccn="3" cloc="2" loc="13" locExecutable="11" ncloc="11" npath="4"/>
+      <method name="setDbConnection" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="valueObject" ccn="3" cloc="0" loc="10" locExecutable="10" ncloc="10" npath="3"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/DateField.class.php" classes="1" cloc="4" functions="0" loc="69" locExecutable="55" ncloc="65">
+    <class name="DateField" cis="17" cloc="0" cr="0.15" csz="20" dit="1" impl="0" loc="62" locExecutable="53" ncloc="62" nom="9" rcr="0.17125" vars="3" varsi="3" varsnp="0" wmc="17" wmci="19" wmcnp="17">
+      <method name="DateField" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getDay_j" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getMonth_n" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getYear_Y" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="1"/>
+      <method name="setValue" ccn="9" cloc="0" loc="21" locExecutable="21" ncloc="21" npath="10"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/DatetimeField.class.php" classes="1" cloc="0" functions="0" loc="75" locExecutable="61" ncloc="75">
+    <class name="DatetimeField" cis="26" cloc="0" cr="0.15" csz="28" dit="1" impl="0" loc="73" locExecutable="59" ncloc="73" nom="14" rcr="0.17125" vars="2" varsi="2" varsnp="0" wmc="26" wmci="28" wmcnp="26">
+      <method name="DatetimeField" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getDateValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getDay_j" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getHour_G" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getMinute_org" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getMonth_n" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getSecond_org" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getTimeValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getYear_Y" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="setValue" ccn="13" cloc="0" loc="15" locExecutable="15" ncloc="15" npath="13"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/models/Dictionary.class.php" classes="1" cloc="0" functions="0" loc="14" locExecutable="13" ncloc="14">
+    <class name="Dictionary" cis="1" cloc="0" cr="0.15" csz="4" dit="1" impl="0" loc="12" locExecutable="11" ncloc="12" nom="1" rcr="0.1925" vars="3" varsi="3" varsnp="0" wmc="1" wmci="15" wmcnp="1">
+      <method name="__construct" ccn="1" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/controllers/DictionaryController.class.php" classes="1" cloc="0" functions="0" loc="9" locExecutable="9" ncloc="9">
+    <class name="DictionaryController" cis="1" cloc="0" cr="0.15" csz="1" dit="1" impl="0" loc="7" locExecutable="7" ncloc="7" nom="1" rcr="0.181875" vars="0" varsi="0" varsnp="0" wmc="1" wmci="12" wmcnp="1">
+      <method name="indexAction" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/db/DictionaryDb.class.php" classes="1" cloc="0" functions="0" loc="4" locExecutable="4" ncloc="4">
+    <class name="DictionaryDb" cis="0" cloc="0" cr="0.15" csz="0" dit="1" impl="0" loc="2" locExecutable="2" ncloc="2" nom="0" rcr="0.1925" vars="0" varsi="0" varsnp="0" wmc="0" wmci="40" wmcnp="0"/>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/Fields.class.php" classes="1" cloc="0" functions="0" loc="15" locExecutable="13" ncloc="15">
+    <class name="Fields" cis="6" cloc="0" cr="0.915" csz="6" dit="0" impl="0" loc="14" locExecutable="12" ncloc="14" nom="6" rcr="0.15" vars="0" varsi="0" varsnp="0" wmc="6" wmci="6" wmcnp="6">
+      <method name="breakLineValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="1" locExecutable="0" ncloc="1" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="1" locExecutable="0" ncloc="1" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="1" locExecutable="0" ncloc="1" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="1" locExecutable="0" ncloc="1" npath="1"/>
+      <method name="safeValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/controllers/HomepageController.class.php" classes="1" cloc="0" functions="0" loc="8" locExecutable="7" ncloc="8">
+    <class name="HomepageController" cis="1" cloc="0" cr="0.15" csz="1" dit="1" impl="0" loc="6" locExecutable="5" ncloc="6" nom="1" rcr="0.181875" vars="0" varsi="0" varsnp="0" wmc="1" wmci="12" wmcnp="1">
+      <method name="indexAction" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/IntegerField.class.php" classes="1" cloc="0" functions="0" loc="27" locExecutable="22" ncloc="27">
+    <class name="IntegerField" cis="6" cloc="0" cr="0.15" csz="7" dit="1" impl="0" loc="25" locExecutable="20" ncloc="25" nom="5" rcr="0.17125" vars="1" varsi="1" varsnp="0" wmc="6" wmci="8" wmcnp="6">
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="setValue" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/Model.class.php" classes="1" cloc="0" functions="0" loc="58" locExecutable="50" ncloc="58">
+    <class name="Model" cis="14" cloc="0" cr="0.5325" csz="16" dit="0" impl="0" loc="57" locExecutable="49" ncloc="57" nom="8" rcr="0.15" vars="1" varsi="1" varsnp="0" wmc="15" wmci="15" wmcnp="14">
+      <method name="__get" ccn="3" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="4"/>
+      <method name="getModelName" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getPK" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="getPKField" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+      <method name="getTableName" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getVars" ccn="1" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="1"/>
+      <method name="getVarsWithoutPK" ccn="3" cloc="0" loc="9" locExecutable="9" ncloc="9" npath="3"/>
+      <method name="setPKField" ccn="3" cloc="0" loc="9" locExecutable="9" ncloc="9" npath="3"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/Router.class.php" classes="1" cloc="0" functions="0" loc="29" locExecutable="24" ncloc="29">
+    <class name="Router" cis="4" cloc="0" cr="0.15" csz="4" dit="0" impl="0" loc="25" locExecutable="22" ncloc="25" nom="1" rcr="0.15" vars="0" varsi="0" varsnp="0" wmc="4" wmci="4" wmcnp="4">
+      <method name="route" ccn="4" cloc="0" loc="22" locExecutable="20" ncloc="22" npath="50"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/conf/Settings.class.php" classes="1" cloc="16" functions="0" loc="25" locExecutable="14" ncloc="9">
+    <class name="Settings" cis="1" cloc="16" cr="0.15" csz="8" dit="0" impl="0" loc="23" locExecutable="12" ncloc="7" nom="1" rcr="0.15" vars="7" varsi="7" varsnp="0" wmc="1" wmci="1" wmcnp="1">
+      <method name="__get" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/admin/SphpAdmin.class.php" classes="1" cloc="0" functions="0" loc="276" locExecutable="245" ncloc="276">
+    <class name="SphpAdmin" cis="41" cloc="0" cr="0.15" csz="44" dit="0" impl="0" loc="274" locExecutable="243" ncloc="274" nom="27" rcr="0.15" vars="0" varsi="0" varsnp="0" wmc="44" wmci="44" wmcnp="41">
+      <method name="clean_project" ccn="2" cloc="0" loc="7" locExecutable="6" ncloc="7" npath="2"/>
+      <method name="create_app" ccn="3" cloc="0" loc="15" locExecutable="15" ncloc="15" npath="3"/>
+      <method name="dbsync_app" ccn="4" cloc="0" loc="17" locExecutable="17" ncloc="17" npath="4"/>
+      <method name="execute" ccn="3" cloc="0" loc="14" locExecutable="14" ncloc="14" npath="3"/>
+      <method name="help" ccn="3" cloc="0" loc="15" locExecutable="15" ncloc="15" npath="3"/>
+      <method name="helpGuide" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="helpclean_project" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="helpcreate_app" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="helpdbsync_app" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="helphelp" ccn="2" cloc="0" loc="8" locExecutable="7" ncloc="8" npath="2"/>
+      <method name="helpinit_project" ccn="1" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="1"/>
+      <method name="helpsettings_wizard" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="init_project" ccn="2" cloc="0" loc="10" locExecutable="8" ncloc="10" npath="2"/>
+      <method name="legalSubcommand" ccn="3" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="3"/>
+      <method name="moveToFolder" ccn="2" cloc="0" loc="8" locExecutable="8" ncloc="8" npath="2"/>
+      <method name="moveToTrash" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+      <method name="projectRoot" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="recreateFolder" ccn="2" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="2"/>
+      <method name="recreateTrash" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="settings_wizard" ccn="2" cloc="0" loc="47" locExecutable="47" ncloc="47" npath="2"/>
+      <method name="subcommandList" ccn="1" cloc="0" loc="10" locExecutable="10" ncloc="10" npath="1"/>
+      <method name="touchControllerClass" ccn="1" cloc="0" loc="8" locExecutable="8" ncloc="8" npath="1"/>
+      <method name="touchDbClass" ccn="1" cloc="0" loc="8" locExecutable="8" ncloc="8" npath="1"/>
+      <method name="touchModelClass" ccn="1" cloc="0" loc="15" locExecutable="15" ncloc="15" npath="1"/>
+      <method name="trashPath" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="userFolders" ccn="1" cloc="0" loc="9" locExecutable="9" ncloc="9" npath="1"/>
+      <method name="welcome" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/StringField.class.php" classes="1" cloc="0" functions="0" loc="42" locExecutable="34" ncloc="42">
+    <class name="StringField" cis="10" cloc="0" cr="0.15" csz="12" dit="1" impl="0" loc="40" locExecutable="32" ncloc="40" nom="8" rcr="0.17125" vars="2" varsi="2" varsnp="0" wmc="10" wmci="12" wmcnp="10">
+      <method name="StringField" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getMaxLength" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getSafeValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="setValue" ccn="3" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="4"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/TextField.class.php" classes="1" cloc="1" functions="0" loc="36" locExecutable="27" ncloc="35">
+    <class name="TextField" cis="8" cloc="1" cr="0.15" csz="9" dit="1" impl="0" loc="35" locExecutable="26" ncloc="34" nom="7" rcr="0.17125" vars="1" varsi="1" varsnp="0" wmc="8" wmci="10" wmcnp="8">
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getBreakLineValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getSafeValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="setValue" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/fields/TimeField.class.php" classes="1" cloc="0" functions="0" loc="64" locExecutable="55" ncloc="64">
+    <class name="TimeField" cis="22" cloc="0" cr="0.15" csz="25" dit="1" impl="0" loc="62" locExecutable="53" ncloc="62" nom="9" rcr="0.17125" vars="3" varsi="3" varsnp="0" wmc="22" wmci="24" wmcnp="22">
+      <method name="TimeField" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="createTableSqlStmt" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getHour_G" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getMinute_org" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getOriginalValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getSecond_org" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="processingPDOValue" ccn="1" cloc="0" loc="6" locExecutable="6" ncloc="6" npath="1"/>
+      <method name="setValue" ccn="14" cloc="0" loc="21" locExecutable="21" ncloc="21" npath="59"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/core/View.class.php" classes="1" cloc="0" functions="0" loc="34" locExecutable="29" ncloc="34">
+    <class name="View" cis="8" cloc="0" cr="0.15" csz="10" dit="0" impl="0" loc="32" locExecutable="27" ncloc="32" nom="5" rcr="0.15" vars="2" varsi="2" varsnp="0" wmc="8" wmci="8" wmcnp="8">
+      <method name="getTemplateName" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+      <method name="getValue" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+      <method name="render" ccn="2" cloc="0" loc="5" locExecutable="5" ncloc="5" npath="2"/>
+      <method name="setTemplate" ccn="2" cloc="0" loc="7" locExecutable="7" ncloc="7" npath="2"/>
+      <method name="setValue" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    </class>
+  </file>
+  <file name="/var/www/cents.fazey.org/sensiblephp/init.php" classes="0" cloc="0" functions="6" loc="77" locExecutable="66" ncloc="77">
+    <function name="__autoload" ccn="1" cloc="0" loc="3" locExecutable="3" ncloc="3" npath="1"/>
+    <function name="errorHandler" ccn="2" cloc="0" loc="15" locExecutable="15" ncloc="15" npath="2"/>
+    <function name="exceptionHandler" ccn="2" cloc="0" loc="11" locExecutable="11" ncloc="11" npath="2"/>
+    <function name="getDebugModel" ccn="2" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="5"/>
+    <function name="getTimezone" ccn="2" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="5"/>
+    <function name="init" ccn="1" cloc="0" loc="4" locExecutable="4" ncloc="4" npath="1"/>
+  </file>
+</metrics>
