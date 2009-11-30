@@ -43,6 +43,10 @@ class TimeField extends Fields {
 	}
 	
 	function getValue() {
+		return $this->getOriginalValue();
+	}
+	
+	function getOriginalValue() {
 		return date("H:i:s", mktime($this->hour, $this->minute, $this->second, 1, 1, 1970));
 	}
 

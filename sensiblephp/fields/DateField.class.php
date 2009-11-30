@@ -48,7 +48,7 @@ class DateField extends Fields {
 	}
 	
 	function getValue() {
-		return date("Y-m-d", mktime(0, 0, 0, $this->month, $this->day, $this->year));
+		return $this->getOriginalValue();
 	}
 	
 	function processingPDOValue($value) {
@@ -60,6 +60,10 @@ class DateField extends Fields {
 	
 	function createTableSqlStmt() {
 		return "date NOT NULL";
+	}
+	
+	function getOriginalValue() {
+		return date("Y-m-d", mktime(0, 0, 0, $this->month, $this->day, $this->year));
 	}
 }
 ?>

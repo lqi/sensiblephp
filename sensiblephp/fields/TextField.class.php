@@ -9,7 +9,7 @@ class TextField extends Fields {
 	}
 	
 	function getValue() {
-		return $this->breakLineValue($this->safeValue($this->value));
+		return $this->breakLineValue($this->getSafeValue());
 	}
 	
 	function getSafeValue() {
