@@ -24,6 +24,10 @@ class DatetimeField extends Fields {
 	}
 	
 	function getValue() {
+		return $this->getOriginalValue();
+	}
+	
+	function getOriginalValue() {
 		return $this->date->getValue() . " " . $this->time->getValue();
 	}
 	

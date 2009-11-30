@@ -149,7 +149,7 @@ abstract class Database {
 			$valueString = "";
 			foreach($model->getVarsWithoutPK() as $attribute) {
 				$keyString = $keyString . "`" . $attribute . "`, ";
-				$valueString = $valueString . "'" . $model->$attribute->getValue() . "', ";
+				$valueString = $valueString . "'" . $model->$attribute->getOriginalValue() . "', ";
 			}
 			$keyString = substr($keyString, 0, -2);
 			$valueString = substr($valueString, 0, -2);
@@ -159,11 +159,11 @@ abstract class Database {
 		else { // update current item
 			$setString = "";
 			foreach($model->getVarsWithoutPK() as $attribute) {
-				$setString = $setString . "`" . $attribute . "` = '" . $model->$attribute->getValue() . "', ";
+				$setString = $setString . "`" . $attribute . "` = '" . $model->$attribute->getOriginalValue() . "', ";
 			}
 			$setString = substr($setString, 0, -2);
 			$sql = "UPDATE `" . $model->getTableName() . "` SET " . $setString . 
-					" WHERE `" . $model->getPKField() . "`=" . $model->pk->getValue();
+					" WHERE `" . $model->getPKField() . "`=" . $model->pk->getOriginalValue();
 		}	
 		if ($this->execute($sql)) {
 			return true;
