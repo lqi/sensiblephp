@@ -3,13 +3,50 @@ Demo grading
 Total [40]:
 
 Program demoed and works well [10]:
+Showed creating blog and commenting
+No user sign on
 
 Presented design metrics (like D') [5]:
+Using phpunit to generate graphs
+Everything under global package
 
 Code coverage details [5]:
+92%
+For framework 88%
 
 What the team is proud of [5]:
+Created own framwork
+DRY
+OCP
+Coverage and metrics
 
 What they think needs to be improved [5]:
+Did not get to some amazing features
 
 Design considerations and usage [10]:
+DRY
+OCP - framework can support different applications
+SRP
+MVC
+Observer (only as part of MVC)
+Object Adapter (In fields)
+
+Blog and dictionary.
+MVC framework
+Decided to use agile
+
+PhpUnit, Xdebug for coverage, pdepend for metrics
+Redmine for management
+
+Lots of details outside of design focus. Let's get to talk about
+design.
+                                                    
+Blog related to BlogComment
+Dictionary
+
+Created a framework and an application on top of it.
+Described features of the framework
+Class diagram is not readable
+
+Showed action flow diagram.
+Following MVC
