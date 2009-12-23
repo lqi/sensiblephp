@@ -9,11 +9,11 @@ class Settings {
 	/*
 		Database Settings
 	*/
-	private $host = "fazey.org";		//Host of Database, leave blank for "localhost"
+	private $host = "";		//Host of Database, leave blank for "localhost"
 	private $port = "";		//Port of Database, leave blank for null
-	private $user = "cents";		//Username of Database, leave blank for null
-	private $password = "pl0x88!";		//Password of Database, leave blank for null
-	private $dbname = "cents";		//Database name, leave blank for null
+	private $user = "";		//Username of Database, leave blank for null
+	private $password = "";		//Password of Database, leave blank for null
+	private $dbname = "";		//Database name, leave blank for null
 
 	/*
 		Don't modify anything below
