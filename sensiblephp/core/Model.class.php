@@ -22,7 +22,9 @@ abstract class Model {
 	}
 	
 	function setPKField($newPK) {
+print "new: " . $newPK . "\n";
 		foreach($this->getVars() as $attribute) {
+print $attribute . "\n";
 			if ($attribute == $newPK) {
 				$this->primaryKey = $newPK;
 				return;
@@ -33,8 +35,6 @@ abstract class Model {
 	
 	function getVars() {
 		$varsArray = array_keys(get_object_vars($this));
-		$length = count($varsArray);
-		unset($varsArray[$length - 1]);
 		return $varsArray;
 	}
 	
