@@ -22,9 +22,7 @@ abstract class Model {
 	}
 	
 	function setPKField($newPK) {
-print "new: " . $newPK . "\n";
 		foreach($this->getVars() as $attribute) {
-print $attribute . "\n";
 			if ($attribute == $newPK) {
 				$this->primaryKey = $newPK;
 				return;
