@@ -33,8 +33,6 @@ abstract class Model {
 	
 	function getVars() {
 		$varsArray = array_keys(get_object_vars($this));
-		$length = count($varsArray);
-		unset($varsArray[$length - 1]);
 		return $varsArray;
 	}
 	
