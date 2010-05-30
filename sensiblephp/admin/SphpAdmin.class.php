@@ -118,7 +118,21 @@ class SphpAdmin
 			$this->recreateFolder($folderPath);
 		}
 		
+		$this->touchHomepageControllerClass();
+		
 		$this->settings_wizard();
+	}
+	
+	private function touchHomepageControllerClass() {
+		$file = fopen($this->projectRoot() . "controllers/HomepageController.class.php", 'w');
+		$content = "<?php\nclass HomepageController extends Controller {\n" .
+					"\tfunction indexAction() {\n" .
+					"\t\techo \"<h1>It works!</h1><p> - Greetings from SensiblePHP framework!</p>\";\n" .
+					"\t}\n" .
+					"}\n" .
+					"?>";
+		fwrite($file, $content);
+		fclose($file);
 	}
 	
 	private function touchModelClass($appName) {
