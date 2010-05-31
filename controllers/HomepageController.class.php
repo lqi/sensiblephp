@@ -1,6 +1,11 @@
 <?php
 class HomepageController extends Controller {
 	function indexAction() {
-		echo "<h1>It works!</h1><p> - Greetings from SensiblePHP framework!</p>";
+		$this->setTemplate("homepage");
+		$accountDb = new AccountDb;
+		$account = $accountDb->logedInAccount();
+		if ($account) {
+			$this->setValue("account", $account);
+		}
 	}
 }

@@ -70,6 +70,7 @@
 	set_exception_handler('exceptionHandler');
 	
 	function init() {
+		session_start(); 
 		$router = new Router;
 		$router->route();
 	}
