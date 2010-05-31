@@ -49,7 +49,7 @@ privilege: <?php echo $account->privilege->getValue(); ?><br />
 <p>First Hr: <?php if ($application->hasFirstHrDecision()) { if ($application->first_hr_decision->getValue()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
 <p>Second Hr: <?php if ($application->hasSecondHrDecision()) { if ($application->second_hr_decision->getValue()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
 <p>Hr Decision: <?php if ($application->hasHrDecision()) { if ($application->hrDecision()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
-<p>Final Decision: <?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
+<p>Final Decision: <?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "Success!"; } else { echo "We are sorry, but you are not admitted!"; }} else { echo "Please wait for final decision"; } ?></p>
 <?php
 			}
 		}
