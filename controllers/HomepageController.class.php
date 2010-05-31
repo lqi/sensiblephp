@@ -6,9 +6,13 @@ class HomepageController extends Controller {
 		$account = $accountDb->logedInAccount();
 		if ($account) {
 			$this->setValue("account", $account);
+			$user_id = $account->user_id->getValue();
 			$infoDb = new BasicInfoDb;
-			$info = $infoDb->basicInfoFromUserId($account->user_id->getValue());
+			$info = $infoDb->basicInfoFromUserId($user_id);
 			$this->setValue("info", $info);
+			$appDb = new ApplicationDb;
+			$application = $appDb->applicationStatusFromUserId($user_id);
+			$this->setValue("application", $application);
 		}
 	}
 }
