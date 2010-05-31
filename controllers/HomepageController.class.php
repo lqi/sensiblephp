@@ -16,6 +16,23 @@ class HomepageController extends Controller {
 				$application = $appDb->applicationStatusFromUserId($user_id);
 				$this->setValue("application", $application);
 			}
+			if ($privilege == 3) {
+				$appDb = new ApplicationDb;
+				$toDoApps = array();
+				foreach($appDb->all() as $app) {
+					if (!$app->hasHrDecision()) {
+						if ($app->hasFirstHrDecision()) {
+							if ($app->first_hr_id->getValue() != $user_id) {
+								$toDoApps[] = $app;
+							}
+						}
+						else {
+							$toDoApps[] = $app;
+						}
+					}
+				}
+				$this->setValue("toDoApps", $toDoApps);
+			}
 		}
 	}
 }

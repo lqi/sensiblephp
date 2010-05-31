@@ -9,9 +9,13 @@ privilege: <?php echo $account->privilege->getValue(); ?><br />
 </div>
 <?php } ?>
 <p><a href="/Account/register">Register</a></p>
-<?php if ($account) { ?>
-<p><a href="/Account/logout">Logout</a></p>
 <?php 
+if ($account) { 
+$privilege = $account->privilege->getValue();
+?>
+<p><a href="/Account/logout">Logout</a></p>
+<?php
+if ($privilege == 4) {
 	$info = $this->getValue("info");
 	if ($info) {
 ?>
@@ -19,7 +23,6 @@ privilege: <?php echo $account->privilege->getValue(); ?><br />
 <p>User Id: <?php echo $account->user_id->getValue(); ?></p>
 <p>Privilege: 
 <?php
-		$privilege = $account->privilege->getValue();
 		if ($privilege == 4) {
 			echo "Normal";
 		}
@@ -70,6 +73,15 @@ privilege: <?php echo $account->privilege->getValue(); ?><br />
 </p>
 <?php
 	}
+}
+if ($privilege == 3) {
+	$toDoApps = $this->getValue("toDoApps");
+	echo "<ul>";
+	foreach ($toDoApps as $app) {
+		echo "<li>" . $app->application_id->getValue() . " | " . $app->user_id->getValue() . " | <a href=\"/Application/hrDecide?appId=" . $app->user_id->getValue() . "&action=1\">Approve</a> | <a href=\"/Application/hrDecide?appId=" . $app->user_id->getValue() . "&action=0\">Reject</a></li>";
+	}
+	echo "</ul>";
+}
 } else {?>
 <p><a href="/Account/login">Login</a></p>
 <?php } ?>
