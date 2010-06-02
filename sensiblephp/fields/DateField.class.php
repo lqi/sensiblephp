@@ -22,7 +22,7 @@ class DateField extends Fields {
 			}
 			else {
 				if (!mktime(0, 0, 0, $month, $day, $year))
-					throw new InvalidArgumentException("InvalidArgumentException: Illigal input!");
+					throw new InvalidArgumentException("InvalidArgumentException: Illigal input in DateField!");
 				if (!checkdate($month, $day, $year))
 					throw new InvalidArgumentException("InvalidArgumentException: Illigal Date!");
 				$this->year = (int) $year;

@@ -13,5 +13,10 @@ class WorkingTime extends Model {
 
 		$this->setPKField("id");
 	}
+	
+	public function isWorking() {
+		$emptyDatetime = new DatetimeField(1971, 1, 1, 23, 59, 59);
+		return $this->end_time == $emptyDatetime;
+	}
 }
 ?>

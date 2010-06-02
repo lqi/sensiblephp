@@ -1,4 +1,4 @@
-#header { height: 120px; background-color: yellow; }
+#header { height: 120px; background-color: lightyellow; }
 #navigation { height: 30px; background-color: lightblue; }
-#content { height: 600px; background-color: green; }
+#content { height: 600px; background-color: lightgreen; }
 #footer { height: 120px; background-color: lightblue; }

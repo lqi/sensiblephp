@@ -4,7 +4,7 @@ $account = $this->getValue("account");
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>Layout Test</title>
+	<title>Human Resource Management System</title>
 	<link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
 </head>
@@ -66,7 +66,72 @@ if ($privilege == 4) {
 		$application = $this->getValue("application");
 		if ($application) {
 			if ($application->success()) {
-				echo "TODO: employee information.";
+?>
+	<h3>Latest Department Information</h3>
+<?php
+				$deptInfo = $this->getValue("deptInfo");
+				if ($deptInfo) {
+					$latestDeptInfo = $deptInfo[0];
+?>
+	<p>Deparment: <?php echo $latestDeptInfo->department_id->getValue(); ?></p>
+	<p>Active Time: <?php echo $latestDeptInfo->active_time->getValue(); ?></p>
+<?php
+				}
+				else {
+					echo "<p>You have not been assigned to any department!</p>";
+				}
+?>
+	<h3>Latest Payment Information</h3>
+<?php
+				$payInfo = $this->getValue("paymentInfo");
+				if ($payInfo) {
+					$latestPaymentInfo = $payInfo[0];
+?>
+	<p>Payment: <?php echo $latestPaymentInfo->payment->getValue(); ?></p>
+	<p>Active Time: <?php echo $latestPaymentInfo->active_time->getValue(); ?></p>
+<?php
+				}
+				else {
+					echo "<p>You have not been assigned to any department!</p>";
+				}
+?>
+	<h3>Training History</h3>
+<?php
+				$trainHistory = $this->getValue("trainingHistory");
+				if ($trainHistory) {
+					foreach ($trainHistory as $trainInfo) {
+?>
+	<p><?php echo $trainInfo->train_time->getValue(); ?>: <?php echo $trainInfo->train_program->getValue(); ?>.</p>
+<?php
+					}
+				}
+				else {
+					echo "<p>You have no training history log!</p>";
+				}
+?>
+	<h3>Working Time Management</h3>
+<?php
+				$workingTimes = $this->getValue("workingTimes");
+				if ($workingTimes) {
+					$latestWorkingTime = $workingTimes[0];
+					if ($latestWorkingTime->isWorking()) {
+?>
+	<p>Work started at <?php echo $latestWorkingTime->start_time->getValue(); ?></p>
+	<p>Ready to go home? Click <a href="/WorkingTime/off">HERE</a>.</p>
+<?php
+					}
+					else {
+?>
+	<p>Latest time on work from <?php echo $latestWorkingTime->start_time->getValue(); ?> to <?php echo $latestWorkingTime->end_time->getValue(); ?>.</p>
+	<p>Start your brand new day by clicking <a href="/WorkingTime/on">HERE</a>!</p>
+<?php
+					}
+				}
+				else {
+?>
+	<p>You have no working history! Start your new carrer by clicking <a href="/WorkingTime/on">HERE</a>!</p>
+<?php
+				}
 			}
 			else {
 ?>
