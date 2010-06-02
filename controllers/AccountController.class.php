@@ -27,6 +27,48 @@ class AccountController extends Controller {
 		}
 	}
 	
+	function newHrAction() {
+		$username = $this->fetchPost("username");
+		$accountDb = new AccountDb;
+		if ($accountDb->usernameExist($username)) {
+			echo "Username exists!";
+		}
+		else {
+			$password = $this->fetchPost("password");
+			$account = new Account;
+			$account->username->setValue($username);
+			$account->password->setValue($password);
+			$account->privilege->setValue(3);
+			if ($accountDb->save($account)) {
+				$this->redirect("Homepage", "index");
+			}
+			else {
+				echo "Cannot register!";
+			}
+		}
+	}
+	
+	function newTeacherAction() {
+		$username = $this->fetchPost("username");
+		$accountDb = new AccountDb;
+		if ($accountDb->usernameExist($username)) {
+			echo "Username exists!";
+		}
+		else {
+			$password = $this->fetchPost("password");
+			$account = new Account;
+			$account->username->setValue($username);
+			$account->password->setValue($password);
+			$account->privilege->setValue(2);
+			if ($accountDb->save($account)) {
+				$this->redirect("Homepage", "index");
+			}
+			else {
+				echo "Cannot register!";
+			}
+		}
+	}
+	
 	function loginAction() {
 		$this->setTemplate("account/loginForm");
 	}

@@ -72,5 +72,25 @@ class ApplicationController extends Controller {
 			}
 		}
 	}
+	
+	function teaDecideAction() {
+		$account = $this->verifyLogin();
+		if ($account && $account->privilege->getValue() == 2) {
+			$user_id = (int) $this->fetchGet("appId");
+			$action = (bool) $this->fetchGet("action");
+			$hr_id = $account->user_id->getValue();
+			$appDb = new ApplicationDb;
+			$application = $appDb->applicationStatusFromUserId($user_id);
+			$application->teacher_id->setValue($hr_id);
+			$application->teacher_decision->setValue($action);
+
+			if ($appDb->save($application)) {
+				$this->redirect("Homepage", "index");
+			}
+			else {
+				echo "Error in Teacher decide!";
+			}
+		}
+	}
 }
 ?>

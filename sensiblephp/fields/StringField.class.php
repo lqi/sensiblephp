@@ -13,7 +13,7 @@ class StringField extends Fields {
 	
 	function setValue($value) {
 		if (strlen($value) == 0)
-			throw new InvalidArgumentException('InvalidArgumentException: Empty value.');
+			throw new InvalidArgumentException('InvalidArgumentException: Empty value when setting StringField.');
 		if (strlen($value) > $this->maxLength)
 			throw new InvalidArgumentException('InvalidArgumentException: More characters than max length.');
 		$this->value = $value;

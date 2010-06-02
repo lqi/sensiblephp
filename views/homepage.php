@@ -92,7 +92,7 @@ if ($privilege == 4) {
 <?php
 				}
 				else {
-					echo "<p>You have not been assigned to any department!</p>";
+					echo "<p>You have not been assigned any payment!</p>";
 				}
 ?>
 	<h3>Training History</h3>
@@ -163,12 +163,83 @@ if ($privilege == 4) {
 	}
 }
 if ($privilege == 3) {
+?>
+	<h3>Applications to be Examined</h3>
+	<ul style="margin-left: 30px;">
+<?php
 	$toDoApps = $this->getValue("toDoApps");
-	echo "<ul>";
 	foreach ($toDoApps as $app) {
-		echo "<li>" . $app->application_id->getValue() . " | " . $app->user_id->getValue() . " | <a href=\"/Application/hrDecide?appId=" . $app->user_id->getValue() . "&action=1\">Approve</a> | <a href=\"/Application/hrDecide?appId=" . $app->user_id->getValue() . "&action=0\">Reject</a></li>";
+?>
+	<li><?php echo $app->application_id->getValue(); ?> | <?php echo $app->user_id->getValue(); ?> | <a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">Approve</a> | <a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">Reject</a></li>
+<?php	
 	}
-	echo "</ul>";
+?>
+	</ul>
+	<h3>Employee Management</h3>
+	<ul style="margin-left: 30px;">
+<?php
+	$employees = $this->getValue("employees");
+	foreach ($employees as $employee) {
+?>
+	<li><a href="/Homepage/manage?user_id=<?php echo $employee->user_id->getValue(); ?>"><?php echo $employee->real_name->getValue(); ?></a></li>
+<?php
+	}
+}
+if ($privilege == 2) {
+?>
+	<h3>Applications to be Examined</h3>
+	<ul style="margin-left: 30px;">
+<?php
+	$toDoApps = $this->getValue("toDoApps");
+	foreach ($toDoApps as $app) {
+?>
+	<li>Application Id: <?php echo $app->application_id->getValue(); ?> | User Id: <?php echo $app->user_id->getValue(); ?> | Decision of HR: 
+	<?php
+		if ($app->hasHrDecision()) {
+			if ($app->hrDecision()) {
+				echo "Pass";
+			}
+			else {
+				echo "Fail";
+			}
+		}
+		else {
+			echo "Pending";
+		}
+	?>
+	 | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">Approve</a> | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">Reject</a></li>
+<?php	
+	}
+?>
+	</ul>
+	<h3>Employee Management</h3>
+	<ul style="margin-left: 30px;">
+<?php
+	$employees = $this->getValue("employees");
+	foreach ($employees as $employee) {
+?>
+	<li><a href="/Homepage/manage?user_id=<?php echo $employee->user_id->getValue(); ?>"><?php echo $employee->real_name->getValue(); ?></a></li>
+<?php
+	}
+?>
+	</ul>
+	<h3>Add New HR</h3>
+	<form action="/Account/newHr" method="POST">
+	<p>Username: <input name="username" /></p>
+	<p>Password: <input type="password" name="password" /></p>
+	<p><input type="submit" value="Submit" /></p>
+	</form>
+<?php
+}
+if ($privilege == 1) {
+?>
+	<h3>Add New Teacher</h3>
+	<form action="/Account/newTeacher" method="POST">
+	<p>Username: <input name="username" /></p>
+	<p>Password: <input type="password" name="password" /></p>
+	<p><input type="submit" value="Submit" /></p>
+	</form>
+<?php
 }
 } else {?>
 <p>You have to login before processing.</p>
