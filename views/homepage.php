@@ -16,25 +16,25 @@ $account = $this->getValue("account");
 <?php
 if ($account) {
 ?>
-Greetings from SensiblePHP, <?php echo $account->username->getValue(); ?>. 
-Your privilege is 
+来自SensiblePHP框架的问候，<?php echo $account->username->getValue(); ?>。
+你的权限是
 <?php
 	$privilege = $account->privilege->getValue();
 	if ($privilege == 4) {
-		echo "Normal";
+		echo "普通用户";
 	}
 	if ($privilege == 3) {
-		echo "Human Resource";
+		echo "人力资源管理人员";
 	}
 	if ($privilege == 2) {
-		echo "Teacher";
+		echo "教师";
 	}
 	if ($privilege == 1) {
-		echo "Administration";
+		echo "管理员";
 	}
 ?>
-. 
-<a href="/Account/logout">Logout</a>
+。
+<a href="/Account/logout"><input type="button" value="登出" /></a>
 <?php
 }
 else {
@@ -57,98 +57,98 @@ if ($privilege == 4) {
 	$info = $this->getValue("info");
 	if ($info) {
 ?>
-<h3>Basic Info</h3>
-<p>User Id: <?php echo $account->user_id->getValue(); ?></p>
-<p>Privilege: Normal </p>
-<p>Employee Id: <?php echo $info->employee_id->getValue(); ?></p>
-<p>Real Name: <?php echo $info->real_name->getValue(); ?></p>
+<h3>资本信息</h3>
+<p>用户标识：<?php echo $account->user_id->getValue(); ?></p>
+<p>权限：普通用户 </p>
+<p>员工号：<?php echo $info->employee_id->getValue(); ?></p>
+<p>真实姓名：<?php echo $info->real_name->getValue(); ?></p>
 <?php
 		$application = $this->getValue("application");
 		if ($application) {
 			if ($application->success()) {
 ?>
-	<h3>Latest Department Information</h3>
+	<h3>最新部门信息</h3>
 <?php
 				$deptInfo = $this->getValue("deptInfo");
 				if ($deptInfo) {
 					$latestDeptInfo = $deptInfo[0];
 ?>
-	<p>Deparment: <?php echo $latestDeptInfo->department_id->getValue(); ?></p>
-	<p>Active Time: <?php echo $latestDeptInfo->active_time->getValue(); ?></p>
+	<p>部门号：<?php echo $latestDeptInfo->department_id->getValue(); ?></p>
+	<p>生效时间：<?php echo $latestDeptInfo->active_time->getValue(); ?></p>
 <?php
 				}
 				else {
-					echo "<p>You have not been assigned to any department!</p>";
+					echo "<p>您还没有被分配到任何部门！</p>";
 				}
 ?>
-	<h3>Latest Payment Information</h3>
+	<h3>最新薪资信息</h3>
 <?php
 				$payInfo = $this->getValue("paymentInfo");
 				if ($payInfo) {
 					$latestPaymentInfo = $payInfo[0];
 ?>
-	<p>Payment: <?php echo $latestPaymentInfo->payment->getValue(); ?></p>
-	<p>Active Time: <?php echo $latestPaymentInfo->active_time->getValue(); ?></p>
+	<p>薪水：<?php echo $latestPaymentInfo->payment->getValue(); ?>元</p>
+	<p>生效时间：<?php echo $latestPaymentInfo->active_time->getValue(); ?></p>
 <?php
 				}
 				else {
-					echo "<p>You have not been assigned any payment!</p>";
+					echo "<p>您的薪资信息还没有被录入系统！</p>";
 				}
 ?>
-	<h3>Training History</h3>
+	<h3>培训历史</h3>
 <?php
 				$trainHistory = $this->getValue("trainingHistory");
 				if ($trainHistory) {
 					foreach ($trainHistory as $trainInfo) {
 ?>
-	<p><?php echo $trainInfo->train_time->getValue(); ?>: <?php echo $trainInfo->train_program->getValue(); ?>.</p>
+	<p>您在 <?php echo $trainInfo->train_time->getValue(); ?> 参加培训项目 <?php echo $trainInfo->train_program->getValue(); ?>。</p>
 <?php
 					}
 				}
 				else {
-					echo "<p>You have no training history log!</p>";
+					echo "<p>您还没有参加过任何培训！</p>";
 				}
 ?>
-	<h3>Working Time Management</h3>
+	<h3>工作时间管理</h3>
 <?php
 				$workingTimes = $this->getValue("workingTimes");
 				if ($workingTimes) {
 					$latestWorkingTime = $workingTimes[0];
 					if ($latestWorkingTime->isWorking()) {
 ?>
-	<p>Work started at <?php echo $latestWorkingTime->start_time->getValue(); ?></p>
-	<p>Ready to go home? Click <a href="/WorkingTime/off">HERE</a>.</p>
+	<p>您已与 <?php echo $latestWorkingTime->start_time->getValue(); ?> 开展工作。</p>
+	<p>点击 <a href="/WorkingTime/off">这里</a> 下班回家。</p>
 <?php
 					}
 					else {
 ?>
-	<p>Latest time on work from <?php echo $latestWorkingTime->start_time->getValue(); ?> to <?php echo $latestWorkingTime->end_time->getValue(); ?>.</p>
-	<p>Start your brand new day by clicking <a href="/WorkingTime/on">HERE</a>!</p>
+	<p>上一次工作从 <?php echo $latestWorkingTime->start_time->getValue(); ?> 持续到 <?php echo $latestWorkingTime->end_time->getValue(); ?>。</p>
+	<p>点击 <a href="/WorkingTime/on">这里</a>开始新一天的工作！</p>
 <?php
 					}
 				}
 				else {
 ?>
-	<p>You have no working history! Start your new carrer by clicking <a href="/WorkingTime/on">HERE</a>!</p>
+	<p>您还没有工作经历。点击 <a href="/WorkingTime/on">这里</a> 展开全新的生涯！</p>
 <?php
 				}
 			}
 			else {
 ?>
-<h3>Application Status</h3>
-<p>Application Id: <?php echo $application->application_id->getValue(); ?></p>
-<p>First Hr: <?php if ($application->hasFirstHrDecision()) { if ($application->first_hr_decision->getValue()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
-<p>Second Hr: <?php if ($application->hasSecondHrDecision()) { if ($application->second_hr_decision->getValue()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
-<p>Hr Decision: <?php if ($application->hasHrDecision()) { if ($application->hrDecision()) { echo "Success!"; } else { echo "Fail!"; }} else { echo "Decision Pending..."; } ?></p>
-<p>Final Decision: <?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "Success!"; } else { echo "We are sorry, but you are not admitted!"; }} else { echo "Please wait for final decision"; } ?></p>
+<h3>申请状态</h3>
+<p>申请号：<?php echo $application->application_id->getValue(); ?></p>
+<p>主人事决定：<?php if ($application->hasFirstHrDecision()) { if ($application->first_hr_decision->getValue()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
+<p>副人事决定：<?php if ($application->hasSecondHrDecision()) { if ($application->second_hr_decision->getValue()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
+<p>人事决定：<?php if ($application->hasHrDecision()) { if ($application->hrDecision()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
+<p>最终决定：<?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "通过"; } else { echo "对不起，您的申请是不成功的！"; }} else { echo "请等待最终结果"; } ?>！</p>
 <?php
 			}
 		}
 		else {
 ?>
 <p>
-<span style="color:red;">Now you can apply for jobs.</span>
-<a href="/Application/apply">Apply jobs</a>
+<span style="color:red;">现在您可以</span>
+<a href="/Application/apply">申请工作了</a>！
 </p>
 <?php
 		}
@@ -156,8 +156,8 @@ if ($privilege == 4) {
 	else {
 ?>
 <p>
-<span style="color:red;">You must have your basic info before processing</span>
-<a href="/BasicInfo/newInfo">Fill in Basic Information</a>
+<span style="color:red;">您必须在申请工作之前填写您的个人信息！</span>
+<a href="/BasicInfo/newInfo">填写个人信息</a>
 </p>
 <?php
 	}
@@ -242,7 +242,7 @@ if ($privilege == 1) {
 <?php
 }
 } else {?>
-<p>You have to login before processing.</p>
+<p>请先<a href="/Account/login">登录</a>！</p>
 <?php } ?>
 	</div>
 	<div id="footer">
