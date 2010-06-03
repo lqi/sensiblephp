@@ -117,19 +117,19 @@ if ($privilege == 4) {
 					if ($latestWorkingTime->isWorking()) {
 ?>
 	<p>您已与 <?php echo $latestWorkingTime->start_time->getValue(); ?> 开展工作。</p>
-	<p>点击 <a href="/WorkingTime/off">这里</a> 下班回家。</p>
+	<p>点击 <a href="/WorkingTime/off"><input type="button" value="下班" /></a> 回家。</p>
 <?php
 					}
 					else {
 ?>
 	<p>上一次工作从 <?php echo $latestWorkingTime->start_time->getValue(); ?> 持续到 <?php echo $latestWorkingTime->end_time->getValue(); ?>。</p>
-	<p>点击 <a href="/WorkingTime/on">这里</a>开始新一天的工作！</p>
+	<p>点击 <a href="/WorkingTime/on"><input type="button" value="上班" /></a> 开始新一天的工作！</p>
 <?php
 					}
 				}
 				else {
 ?>
-	<p>您还没有工作经历。点击 <a href="/WorkingTime/on">这里</a> 展开全新的生涯！</p>
+	<p>您还没有工作经历。点击 <a href="/WorkingTime/on"><input type="button" value="上班" /></a> 展开全新的生涯！</p>
 <?php
 				}
 			}
@@ -140,7 +140,7 @@ if ($privilege == 4) {
 <p>主人事决定：<?php if ($application->hasFirstHrDecision()) { if ($application->first_hr_decision->getValue()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
 <p>副人事决定：<?php if ($application->hasSecondHrDecision()) { if ($application->second_hr_decision->getValue()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
 <p>人事决定：<?php if ($application->hasHrDecision()) { if ($application->hrDecision()) { echo "通过"; } else { echo "不通过"; }} else { echo "未作决定"; } ?>！</p>
-<p>最终决定：<?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "通过"; } else { echo "对不起，您的申请是不成功的！"; }} else { echo "请等待最终结果"; } ?>！</p>
+<p>最终决定：<?php if ($application->hasTeacherDecision()) { if ($application->teacherDecision()) { echo "通过"; } else { echo "<span style=\"color:red;\">对不起，您的申请是不成功的！</span>"; }} else { echo "请等待最终结果"; } ?>！</p>
 <?php
 			}
 		}
