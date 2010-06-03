@@ -4,13 +4,13 @@ $account = $this->getValue("account");
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>Human Resource Management System</title>
+	<title>华东理工大学勤办人事管理系统</title>
 	<link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen" />
 </head>
 <body id="layout">
 	<div id="header">
-		Header
+		<div id="title">华东理工大学勤办人事管理系统</div>
 	</div>
 	<div id="navigation">
 <?php
@@ -40,10 +40,10 @@ Your privilege is
 else {
 ?>
 	<form action="/Account/processLogin" method="POST">
-	Username: <input name="username" /> 
-	Password: <input type="password" name="password" /> 
-	<input type="submit" value="Login" />
-	<a href="/Account/register">Register</a>
+	用户名：<input name="username" /> 
+	密码：<input type="password" name="password" /> 
+	<input type="submit" value="登录" />
+	<a href="/Account/register"><input type="button" value="注册" /></a>
 	</form>
 <?php
 }
@@ -246,7 +246,7 @@ if ($privilege == 1) {
 <?php } ?>
 	</div>
 	<div id="footer">
-		Footer
+		<div id="copyright">版权所有 &copy; 2010 华东理工大学</div>
 	</div>
 </body>
 </html>
