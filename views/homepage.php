@@ -193,21 +193,21 @@ if ($privilege == 2) {
 	$toDoApps = $this->getValue("toDoApps");
 	foreach ($toDoApps as $app) {
 ?>
-	<li>申请号为 <?php echo $app->application_id->getValue(); ?> 的申请人 <?php echo $app->user_id->getValue(); ?> ，该份申请在人事管理人员的审核结果为 
+	<li><form action="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1" method="POST">申请号为 <?php echo $app->application_id->getValue(); ?> 的申请人 <?php echo $app->user_id->getValue(); ?> ，该份申请在人事管理人员的审核结果为 
 	<?php
 		if ($app->hasHrDecision()) {
 			if ($app->hrDecision()) {
-				echo "通过";
+				echo "<span style=\"color:green\">通过</span>";
 			}
 			else {
-				echo "未通过";
+				echo "<span style=\"color:red\">未通过</span>";
 			}
 		}
 		else {
-			echo "等待";
+			echo "<span style=\"color:blue\">等待</span>";
 		}
 	?>
-	 ，<a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">通过</a> | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">拒绝</a></li>
+	 ，您可以输入其起薪 <input name="payment" /> 并选择 <input type="submit" value="通过" /> | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">拒绝</a></form></li>
 <?php	
 	}
 ?>

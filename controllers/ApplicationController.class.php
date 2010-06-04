@@ -83,8 +83,19 @@ class ApplicationController extends Controller {
 			$application = $appDb->applicationStatusFromUserId($user_id);
 			$application->teacher_id->setValue($hr_id);
 			$application->teacher_decision->setValue($action);
+			$payment = $this->fetchPost("payment");
+			$payInfo = new PaymentInfo;
+		  $payInfo->user_id->setValue($user_id);
+		  if ($payment) {
+		  	$payInfo->payment->setValue((int) $payment);
+		  }
+		  else {
+		  	$payInfo->payment->setValue(0);
+		  }
+		  $payInfo->active_time->setValue();
+		  $payInfoDb = new PaymentInfoDb;
 
-			if ($appDb->save($application)) {
+			if ($appDb->save($application) && $payInfoDb->save($payInfo)) {
 				$this->redirect("Homepage", "index");
 			}
 			else {
