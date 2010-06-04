@@ -164,18 +164,18 @@ if ($privilege == 4) {
 }
 if ($privilege == 3) {
 ?>
-	<h3>Applications to be Examined</h3>
+	<h3>需要处理的申请</h3>
 	<ul style="margin-left: 30px;">
 <?php
 	$toDoApps = $this->getValue("toDoApps");
 	foreach ($toDoApps as $app) {
 ?>
-	<li><?php echo $app->application_id->getValue(); ?> | <?php echo $app->user_id->getValue(); ?> | <a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">Approve</a> | <a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">Reject</a></li>
+	<li>第 <?php echo $app->application_id->getValue(); ?> 号申请人 <?php echo $app->user_id->getValue(); ?> ，<a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">通过</a> | <a href="/Application/hrDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">拒绝</a></li>
 <?php	
 	}
 ?>
 	</ul>
-	<h3>Employee Management</h3>
+	<h3>员工管理</h3>
 	<ul style="margin-left: 30px;">
 <?php
 	$employees = $this->getValue("employees");
@@ -187,32 +187,32 @@ if ($privilege == 3) {
 }
 if ($privilege == 2) {
 ?>
-	<h3>Applications to be Examined</h3>
+	<h3>需要处理的申请</h3>
 	<ul style="margin-left: 30px;">
 <?php
 	$toDoApps = $this->getValue("toDoApps");
 	foreach ($toDoApps as $app) {
 ?>
-	<li>Application Id: <?php echo $app->application_id->getValue(); ?> | User Id: <?php echo $app->user_id->getValue(); ?> | Decision of HR: 
+	<li>申请号为 <?php echo $app->application_id->getValue(); ?> 的申请人 <?php echo $app->user_id->getValue(); ?> ，该份申请在人事管理人员的审核结果为 
 	<?php
 		if ($app->hasHrDecision()) {
 			if ($app->hrDecision()) {
-				echo "Pass";
+				echo "通过";
 			}
 			else {
-				echo "Fail";
+				echo "未通过";
 			}
 		}
 		else {
-			echo "Pending";
+			echo "等待";
 		}
 	?>
-	 | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">Approve</a> | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">Reject</a></li>
+	 ，<a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=1">通过</a> | <a href="/Application/teaDecide?appId=<?php echo $app->user_id->getValue(); ?>&action=0">拒绝</a></li>
 <?php	
 	}
 ?>
 	</ul>
-	<h3>Employee Management</h3>
+	<h3>员工管理</h3>
 	<ul style="margin-left: 30px;">
 <?php
 	$employees = $this->getValue("employees");
@@ -223,21 +223,21 @@ if ($privilege == 2) {
 	}
 ?>
 	</ul>
-	<h3>Add New HR</h3>
+	<h3>添加新人事管理人员</h3>
 	<form action="/Account/newHr" method="POST">
-	<p>Username: <input name="username" /></p>
-	<p>Password: <input type="password" name="password" /></p>
-	<p><input type="submit" value="Submit" /></p>
+	<p>用户名：<input name="username" /></p>
+	<p>密码：<input type="password" name="password" /></p>
+	<p><input type="submit" value="添加" /></p>
 	</form>
 <?php
 }
 if ($privilege == 1) {
 ?>
-	<h3>Add New Teacher</h3>
+	<h3>添加新教师</h3>
 	<form action="/Account/newTeacher" method="POST">
-	<p>Username: <input name="username" /></p>
-	<p>Password: <input type="password" name="password" /></p>
-	<p><input type="submit" value="Submit" /></p>
+	<p>用户名：<input name="username" /></p>
+	<p>密码：<input type="password" name="password" /></p>
+	<p><input type="submit" value="添加" /></p>
 	</form>
 <?php
 }
