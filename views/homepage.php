@@ -229,6 +229,22 @@ if ($privilege == 2) {
 	<p>密码：<input type="password" name="password" /></p>
 	<p><input type="submit" value="添加" /></p>
 	</form>
+	<h3>部门管理</h3>
+	<form action="/Department/manage" method="POST">
+	<p>新部门名称：<input name="name" /></p>
+	<p>新部门介绍：<textarea name="descrption"></textarea></p>
+	<p><input type="submit" value="添加" /></p>
+	</form>
+	<ul style="margin-left: 30px; ">
+<?php
+  $departments = $this->getValue("departments");
+  foreach ($departments as $dept) {
+?>
+	<li><form action="/Department/manage" method="POST">第 <?php echo $dept->department_id->getValue(); ?> 号部门，<input type="hidden" name="department_id" value="<?php echo $dept->department_id->getValue(); ?>" />名称 <input name="name" value="<?php echo $dept->name->getValue(); ?>" />，介绍 <input name="descrption" value="<?php echo $dept->description->getValue(); ?>" />。<input type="submit" value="更新" /></form></li>
+<?php
+	}
+?>
+	</ul>
 <?php
 }
 if ($privilege == 1) {

@@ -70,6 +70,8 @@ class HomepageController extends Controller {
 				}
 				$this->setValue("toDoApps", $toDoApps);
 				$this->setValue("employees", $employees);
+				$deptDb = new DepartmentDb;
+			  $this->setValue("departments", $deptDb->all());
 			}
 		}
 	}
