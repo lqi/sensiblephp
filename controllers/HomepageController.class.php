@@ -4,3 +4,4 @@ class HomepageController extends Controller {
 		echo "<h1>It works!</h1><p> - Greetings from SensiblePHP framework!</p>";
 	}
 }
+?>

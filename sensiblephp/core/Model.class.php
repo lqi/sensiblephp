@@ -33,7 +33,13 @@ abstract class Model {
 	
 	function getVars() {
 		$varsArray = array_keys(get_object_vars($this));
-		return $varsArray;
+		$returnArray = array();
+		foreach($varsArray as $it) {
+			if ($it != "primaryKey") {
+				$returnArray[] = $it;
+			}
+		}
+		return $returnArray;
 	}
 	
 	function getVarsWithoutPK() {
